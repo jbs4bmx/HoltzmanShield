@@ -1,15 +1,13 @@
 /*
  *      Name: Holtzman Shield
- *   Version: 311.0.0
+ *   Version: 311.0.2
  * Copyright: jbs4bmx
- *    Update: 01.08.2022
+ *    Update: 06.08.2022
 */
 
 import { DependencyContainer } from "tsyringe";
 import { IMod } from "@spt-aki/models/external/mod";
 import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
-import { LogTextColor } from "@spt-aki/models/spt/logging/LogTextColor";
-import { LogBackgroundColor } from "@spt-aki/models/spt/logging/LogBackgroundColor";
 import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
 import { DatabaseImporter } from "@spt-aki/utils/DatabaseImporter";
 import { PreAkiModLoader } from "@spt-aki/loaders/PreAkiModLoader";
@@ -19,7 +17,8 @@ let hsdb;
 class Holtzman implements IMod
 {
     private pkg;
-    private modName = "jbs4bmx-HoltzmanShield"
+    private path = require('path');
+    private modName = this.path.basename(this.path.dirname(__dirname.split('/').pop()));
 
     public preAkiLoad(container: DependencyContainer)
     {
