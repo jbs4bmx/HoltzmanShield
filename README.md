@@ -4,7 +4,7 @@ This mod adds 17 new variants of armbands based loosely on the shield technology
 
 >Author  : jbs4bmx
 
->Version : 311.0.1 (Supports SPT-AKI 3.0.0 and EFT Version 0.12.12.30.19078)
+>Version : 311.0.2 (Supports SPT-AKI 3.0.0 and EFT Version 0.12.12.30.19078)
 
 >Requires SPT version 3.1.1
 
