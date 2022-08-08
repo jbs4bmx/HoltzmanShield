@@ -122,7 +122,6 @@ class Holtzman implements IMod
         if (typeof MainArmor.RightArm === "boolean") { if (MainArmor.RightArm === true) { armor.push("RightArm") } }
         if (typeof MainArmor.LeftLeg === "boolean") { if (MainArmor.LeftLeg === true) { armor.push("LeftLeg") } }
         if (typeof MainArmor.RightLeg === "boolean") { if (MainArmor.RightLeg === true) { armor.push("RightLeg") } }
-
         if (typeof Resources.RepairCost === "number") { if (!(0 < Resources.RepairCost && Resources.RepairCost < 9999999)) { Resources.RepairCost = 1000 } }
         if (typeof Resources.Durability === "number") { if (!(0 < Resources.Durability && Resources.Durability < 9999999)) { Resources.Durability = 1500 } }
         if (typeof Resources.traderPrice === "number") { if (!(0 < Resources.traderPrice && Resources.traderPrice < 9999999)) { Resources.traderPrice = 69420 } }
@@ -272,7 +271,7 @@ class Holtzman implements IMod
         db.templates.items["HShieldBear"]._props.headSegments = segments;
 
         // GodMode Settings
-        if ( throughput === 1) {
+        if ( throughput === 0) {
             db.templates.items["HShieldEvade"]._props.BluntThroughput = 0
             db.templates.items["HShieldTG"]._props.BluntThroughput = 0
             db.templates.items["HShieldUSEC"]._props.BluntThroughput = 0
