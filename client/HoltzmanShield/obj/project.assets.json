@@ -12,7 +12,7 @@
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
-    "version": "311.0.0",
+    "version": "320.0.1",
     "restore": {
       "projectUniqueName": "C:\\Users\\livin\\OneDrive\\Documents\\GitHub\\HoltzmanShield\\client\\HoltzmanShield\\HoltzmanShield.csproj",
       "projectName": "HoltzmanShield",
@@ -51,7 +51,7 @@
     "frameworks": {
       "net472": {
         "targetAlias": "net472",
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

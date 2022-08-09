@@ -6,15 +6,15 @@ using System.Reflection;
 
 namespace Shield
 {
-    [BepInPlugin("com.jbs4bmx.HoltzmanShield", "HoltzmanShield", "311.0.0")]
+    [BepInPlugin("com.jbs4bmx.HoltzmanShield", "HoltzmanShield", "320.0.1")]
     public class Shield : BaseUnityPlugin
     {
         private void Main()
         {
             // Plugin startup logic
-            Logger.LogInfo("HoltzmanShield v311.0.0 is loading...");
+            Logger.LogInfo("HoltzmanShield v320.0.1 is loading...");
             AddArmBandArmorSlot();
-            Logger.LogInfo("HoltzmanShield v311.0.0 has loaded!");
+            Logger.LogInfo("HoltzmanShield v320.0.1 has loaded!");
         }
 
         // Patch
