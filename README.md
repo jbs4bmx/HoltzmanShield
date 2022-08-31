@@ -4,9 +4,6 @@ This mod adds 17 new variants of armbands based loosely on the shield technology
 
 >Author  : jbs4bmx
 
->Version : 321.0.1 (Supports SPT-AKI 3.2.1 and EFT Version 0.12.12.30.19078)
-
->Requires SPT version 3.2.1
 
 
 ### ==================================================
@@ -30,7 +27,6 @@ Variant List:
 |Holtzman Shield USEC | USEC armband |
 |Holtzman Shield White | White armband |
 |Holtzman Shield Yellow | Yellow armband |
-
 
 
 ### ==================================================
@@ -89,4 +85,4 @@ config.json contents
 }
 ```
 
-:eof
+### End
