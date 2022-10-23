@@ -18,7 +18,6 @@
     "Resources": {
         "RepairCost": 1000,
         "Durability": 1500,
-        "MaxDurability": 1500,
         "traderPrice": 69420
     },
     "GodMode": {

@@ -76,7 +76,6 @@ config.json contents
     "Resources": {
         "RepairCost": 1000,     // [Number] (Any number >= 0) Sets the cost of repairing the item.
         "Durability": 1500,     // [Number] (Any number >= 0) Increases or decreases the amount of armor this item provides.
-        "MaxDurability": 1500,  // [Number] (Any number >= 0) Increases or decreases the max amount of armor this item provides.
         "traderPrice": 69420    // [Number] (Any number >= 0) Sets the price charged by Ragman.
     },
     "GodMode": {
