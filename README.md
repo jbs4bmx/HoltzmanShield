@@ -52,34 +52,42 @@ Variant List:
 
 
 ### Configuration Guide
-Edit .\src\config.json as desired.
+Edit '.\src\config.json' file as desired.
 
 config.json contents
 ```json
 {
     "MainArmor": {
-        "Head": false,          // [Boolean] Set "true" to enable protection for this part of the body.
-        "Chest": false,         // [Boolean] Set "true" to enable protection for this part of the body.
-        "Stomach": false,       // [Boolean] Set "true" to enable protection for this part of the body.
-        "LeftArm": false,       // [Boolean] Set "true" to enable protection for this part of the body.
-        "RightArm": false,      // [Boolean] Set "true" to enable protection for this part of the body.
-        "LeftLeg": false,       // [Boolean] Set "true" to enable protection for this part of the body.
-        "RightLeg": false       // [Boolean] Set "true" to enable protection for this part of the body.
+        "_COMMENT": "What areas of the body do you want to protect?",
+        "Head": true,
+        "Chest": false,
+        "Stomach": false,
+        "LeftArm": false,
+        "RightArm": false,
+        "LeftLeg": false,
+        "RightLeg": false
     },
     "HeadAreas": {
-        "Top": false,           // [Boolean] Set "true" to enable protection for this part of the body.
-        "Nape": false,          // [Boolean] Set "true" to enable protection for this part of the body. Will enable/disable both "Nape" and "LowerNape".
-        "Ears": false,          // [Boolean] Set "true" to enable protection for this part of the body.
-        "Eyes": false,          // [Boolean] Set "true" to enable protection for this part of the body.
-        "Jaws": false           // [Boolean] Set "true" to enable protection for this part of the body.
+        "_COMMENT": "What head areas do you want to protect?",
+        "Top": true,
+        "Nape": false,
+        "Ears": false,
+        "Eyes": false,
+        "Jaws": false
     },
     "Resources": {
-        "RepairCost": 1000,     // [Number] (Any number >= 0) Sets the cost of repairing the item.
-        "Durability": 1500,     // [Number] (Any number >= 0) Increases or decreases the amount of armor this item provides.
-        "traderPrice": 69420    // [Number] (Any number >= 0) Sets the price charged by Ragman.
+        "_COMMENT": "Repair Cost, Item Durability, and Cost of Item from Ragman",
+        "RepairCost": 100,
+        "Durability": 1500,
+        "traderPrice": 69420
     },
     "GodMode": {
-        "Enabled": false        // [Boolean] Set "true" to disable all throughput on armor. Essentially makes the armor impervious to penetration.
+        "_COMMENT": "Enable this to disable penetration of armor. (i.e., 0 throughput)",
+        "Enabled": false
+    },
+    "Blacklist": {
+        "_COMMENT": "Set to true to remove chance of pmc bots spawning with this item in their inventory.",
+        "Value": false
     }
 }
 ```

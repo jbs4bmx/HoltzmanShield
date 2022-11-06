@@ -1,20 +1,25 @@
 /*
  *      Name: Holtzman Shield
- *   Version: 325.0.1
+ *   Version: 325.0.2
  * Copyright: jbs4bmx
- *    Update: 23.10.2022
+ *    Update: 06.11.2022
 */
 
 import { DependencyContainer } from "tsyringe";
 import { IMod } from "@spt-aki/models/external/mod";
+import { IPreAkiLoadMod } from "@spt-aki/models/external/IPreAkiLoadMod";
+import { IPostDBLoadMod } from "@spt-aki/models/externals/IPostDBLoadMod";
 import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
 import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
 import { DatabaseImporter } from "@spt-aki/utils/DatabaseImporter";
 import { PreAkiModLoader } from "@spt-aki/loaders/PreAkiModLoader";
+import { ConfigServer } from "@spt-aki/servers/ConfigServer";
+import { ConfigTypes } from "@spt-aki/models/enums/ConfigTypes";
+import { IBotConfig } from "@spt-aki/models/spt/config/IBotConfig";
 
 let hsdb;
 
-class Holtzman implements IMod
+class Holtzman implements IPreAkiLoadMod, IPostDBLoadMod
 {
     private pkg;
     private path = require('path');
@@ -32,9 +37,6 @@ class Holtzman implements IMod
 
         for (const i_item in hsdb.templates.items.templates) {
             db.templates.items[i_item] = hsdb.templates.items.templates[i_item];
-            // compatability with Fin's mods
-            db.templates.items[i_item]._props.Finallowed = false;
-            db.templates.items[i_item]._props.FinAllowed = false;
         }
 
         for (const h_item of hsdb.templates.handbook.Items) {
@@ -93,10 +95,12 @@ class Holtzman implements IMod
     public setConfigOptions(container: DependencyContainer): void
     {
         const db = container.resolve<DatabaseServer>("DatabaseServer").getTables();
+        const configServer = container.resolve<ConfigServer>("ConfigServer");
+        const botConfig = configServer.getConfig<IBotConfig>(ConfigTypes.BOT);
         const handBook = db.templates.handbook.Items;
         const priceList = db.templates.prices;
         const barterScheme = db.traders["5ac3b934156ae10c4430e83c"].assort.barter_scheme;
-        const { MainArmor, HeadAreas, Resources, GodMode } = require("./config.json");
+        const { MainArmor, HeadAreas, Resources, GodMode, Blacklist } = require("./config.json");
 
         db.templates.items["55d7217a4bdc2d86028b456d"]._props.Slots[14]._props.filters[0].Filter.push(
             "HShieldEvade",
@@ -137,6 +141,7 @@ class Holtzman implements IMod
         if (typeof Resources.Durability === "number") { if ((Resources.Durability < 1) || (Resources.Durability > 9999999)) { Resources.Durability = 1500; } }
         if (typeof Resources.traderPrice === "number") { if ((Resources.traderPrice < 1) || (Resources.traderPrice > 9999999)) { Resources.traderPrice = 69420; } }
         if (typeof GodMode.Enabled === "boolean") { if (GodMode.Enabled) {var throughput = 0; } else { var throughput = 1; } }
+        if (typeof Blacklist.Value === "boolean") { if (Blacklist.Value) { botConfig.pmc.dynamicLoot.blacklist.push("HShieldEvade","HShieldTG","HShieldUSEC","HShieldYellow","HShieldUntar","HShieldRed","HShieldWhite","HShieldRivals","HShieldAlpha","HShieldRFArmy","HShieldTrainHard","HShieldGreen","HShieldBlue","HShieldKiba","HShieldDead","HShieldLabs","HShieldBear"); }}
 
         db.templates.items["HShieldEvade"]._props.RepairCost = Resources.RepairCost;
         db.templates.items["HShieldEvade"]._props.Durability = Resources.Durability;

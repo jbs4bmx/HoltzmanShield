@@ -1,6 +1,6 @@
 {
     "name": "HoltzmanShield",
-    "version": "325.0.1",
+    "version": "325.0.2",
     "main": "src/shield.js",
     "license": "MIT",
     "author": "jbs4bmx",

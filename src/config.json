@@ -1,26 +1,34 @@
 {
     "MainArmor": {
+        "_COMMENT": "What areas of the body do you want to protect?",
         "Head": true,
-        "Thorax": true,
-        "Stomach": true,
-        "LeftArm": true,
-        "RightArm": true,
-        "LeftLeg": true,
-        "RightLeg": true
+        "Thorax": false,
+        "Stomach": false,
+        "LeftArm": false,
+        "RightArm": false,
+        "LeftLeg": false,
+        "RightLeg": false
     },
     "HeadAreas": {
+        "_COMMENT": "What head areas do you want to protect?",
         "Top": true,
-        "Nape": true,
-        "Ears": true,
-        "Eyes": true,
-        "Jaws": true
+        "Nape": false,
+        "Ears": false,
+        "Eyes": false,
+        "Jaws": false
     },
     "Resources": {
-        "RepairCost": 1000,
+        "_COMMENT": "Repair Cost, Item Durability, and Cost of Item from Ragman",
+        "RepairCost": 100,
         "Durability": 1500,
         "traderPrice": 69420
     },
     "GodMode": {
+        "_COMMENT": "Enable this to disable penetration of armor. (i.e., 0 throughput)",
         "Enabled": false
+    },
+    "Blacklist": {
+        "_COMMENT": "Set to true to remove chance of pmc bots spawning with this item in their inventory.",
+        "Value": false
     }
 }
