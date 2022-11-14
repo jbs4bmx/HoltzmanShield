@@ -1,12 +1,11 @@
 /*
  *      Name: Holtzman Shield
- *   Version: 325.0.2
+ *   Version: 330.0.1
  * Copyright: jbs4bmx
- *    Update: 06.11.2022
+ *    Update: [DMY] 14.11.2022
 */
 
 import { DependencyContainer } from "tsyringe";
-import { IMod } from "@spt-aki/models/external/mod";
 import { IPreAkiLoadMod } from "@spt-aki/models/external/IPreAkiLoadMod";
 import { IPostDBLoadMod } from "@spt-aki/models/externals/IPostDBLoadMod";
 import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
@@ -59,20 +58,6 @@ class Holtzman implements IPreAkiLoadMod, IPostDBLoadMod
         for (const tradeName in db.traders) {
             // Ragman
             if ( tradeName === "5ac3b934156ae10c4430e83c" ) {
-                for (const ri_item of hsdb.traders.Ragman.items.list) {
-                    if (!db.traders[tradeName].assort.items.find(i=>i._id == ri_item._id)) {
-                        db.traders[tradeName].assort.items.push(ri_item);
-                    }
-                }
-                for (const rb_item in hsdb.traders.Ragman.barter_scheme) {
-                    db.traders[tradeName].assort.barter_scheme[rb_item] = hsdb.traders.Ragman.barter_scheme[rb_item];
-                }
-                for (const rl_item in hsdb.traders.Ragman.loyal_level_items){
-                    db.traders[tradeName].assort.loyal_level_items[rl_item] = hsdb.traders.Ragman.loyal_level_items[rl_item];
-                }
-            }
-            // ragfair (aka Flea Market)
-            if ( tradeName === "ragfair" ) {
                 for (const ri_item of hsdb.traders.Ragman.items.list) {
                     if (!db.traders[tradeName].assort.items.find(i=>i._id == ri_item._id)) {
                         db.traders[tradeName].assort.items.push(ri_item);
@@ -305,7 +290,6 @@ class Holtzman implements IPreAkiLoadMod, IPostDBLoadMod
             if (barterItem == "HShieldBear" ) { barterScheme[barterItem][0][0].count = Resources.traderPrice; }
         }
 
-        // GodMode Settings
         if ( throughput === 0) {
             db.templates.items["HShieldEvade"]._props.BluntThroughput = 0;
             db.templates.items["HShieldTG"]._props.BluntThroughput = 0;
