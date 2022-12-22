@@ -1,7 +1,7 @@
 {
     "MainArmor": {
         "_COMMENT": "What areas of the body do you want to protect?",
-        "Head": true,
+        "Head": false,
         "Thorax": false,
         "Stomach": false,
         "LeftArm": false,
@@ -10,18 +10,18 @@
         "RightLeg": false
     },
     "HeadAreas": {
-        "_COMMENT": "What head areas do you want to protect?",
-        "Top": true,
+        "_COMMENT": "What head areas do you want to protect? Requires 'Head' set to true.",
+        "Top": false,
         "Nape": false,
         "Ears": false,
         "Eyes": false,
         "Jaws": false
     },
     "Resources": {
-        "_COMMENT": "Repair Cost, Item Durability, and Cost of Item from Ragman",
-        "RepairCost": 100,
+        "_COMMENT": "Self-explanatory section.",
+        "RepairCost": 1415,
         "Durability": 1500,
-        "traderPrice": 69420
+        "traderPrice": 141592
     },
     "GodMode": {
         "_COMMENT": "Enable this to disable penetration of armor. (i.e., 0 throughput)",

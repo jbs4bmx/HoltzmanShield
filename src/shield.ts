@@ -1,8 +1,8 @@
 /*
  *      Name: Holtzman Shield
- *   Version: 330.0.1
+ *   Version: 340.0.1
  * Copyright: jbs4bmx
- *    Update: [DMY] 14.11.2022
+ *    Update: [DMY] 22.12.2022
 */
 
 import { DependencyContainer } from "tsyringe";
@@ -46,8 +46,8 @@ class Holtzman implements IPreAkiLoadMod, IPostDBLoadMod
         }
 
         for (const localeID in locales) {
-            for (const locale in hsdb.locales.en.templates) {
-                locales[localeID].templates[locale] = hsdb.locales.en.templates[locale];
+            for (const locale in hsdb.locales.en) {
+                locales[localeID][locale] = hsdb.locales.en[locale];
             }
         }
 
