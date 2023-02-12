@@ -4,13 +4,13 @@
         "Head": false,
         "Thorax": false,
         "Stomach": false,
-        "LeftArm": false,
-        "RightArm": false,
+        "LeftArm": true,
+        "RightArm": true,
         "LeftLeg": false,
         "RightLeg": false
     },
     "HeadAreas": {
-        "_COMMENT": "What head areas do you want to protect? Requires 'Head' set to true.",
+        "_COMMENT": "What head areas do you want to protect? Requires 'Head' set to false.",
         "Top": false,
         "Nape": false,
         "Ears": false,
@@ -19,7 +19,7 @@
     },
     "Resources": {
         "_COMMENT": "Self-explanatory section.",
-        "RepairCost": 1415,
+        "RepairCost": 1005,
         "Durability": 1500,
         "traderPrice": 141592
     },
@@ -28,7 +28,7 @@
         "Enabled": false
     },
     "Blacklist": {
-        "_COMMENT": "Set to true to remove chance of pmc bots spawning with this item in their inventory.",
+        "_COMMENT": "Set to false to remove chance of pmc bots spawning with this item in their inventory.",
         "Value": false
     }
 }
