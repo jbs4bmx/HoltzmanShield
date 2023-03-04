@@ -119,6 +119,7 @@ class Holtzman implements IPreAkiLoadMod, IPostDBLoadMod
         if (typeof MainArmor.RightLeg === "boolean") { if (MainArmor.RightLeg === true) { armor.push("RightLeg"); } }
         if (typeof HeadAreas.Top === "boolean") { if (HeadAreas.Top === true) { segments.push("Top"); } }
         if (typeof HeadAreas.Nape === "boolean") { if (HeadAreas.Nape === true) { segments.push("Nape"); } }
+        if (typeof HeadAreas.LowerNape === "boolean") { if (HeadAreas.LowerNape === true) { segments.push("LowerNape"); } }
         if (typeof HeadAreas.Ears === "boolean") { if (HeadAreas.Ears === true) { segments.push("Ears"); } }
         if (typeof HeadAreas.Eyes === "boolean") { if (HeadAreas.Eyes === true) { segments.push("Eyes"); } }
         if (typeof HeadAreas.Jaws === "boolean") { if (HeadAreas.Jaws === true) { segments.push("Jaws"); } }

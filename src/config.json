@@ -13,6 +13,7 @@
         "_COMMENT": "What head areas do you want to protect? Requires 'Head' set to false.",
         "Top": false,
         "Nape": false,
+        "LowerNape": false,
         "Ears": false,
         "Eyes": false,
         "Jaws": false
