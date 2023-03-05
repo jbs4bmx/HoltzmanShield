@@ -10,9 +10,10 @@
         "RightLeg": false
     },
     "HeadAreas": {
-        "_COMMENT": "What head areas do you want to protect? Requires 'Head' set to false.",
+        "_COMMENT": "Enable this only if you want only particular areas protected, otherwire Head: true is enough",
         "Top": false,
         "Nape": false,
+        "LowerNape": false,
         "Ears": false,
         "Eyes": false,
         "Jaws": false
