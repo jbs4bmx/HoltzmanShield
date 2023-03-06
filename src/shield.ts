@@ -127,7 +127,12 @@ class Holtzman implements IPreAkiLoadMod, IPostDBLoadMod
         if (typeof Resources.Durability === "number") { if ((Resources.Durability < 1) || (Resources.Durability > 9999999)) { Resources.Durability = 1500; } }
         if (typeof Resources.traderPrice === "number") { if ((Resources.traderPrice < 1) || (Resources.traderPrice > 9999999)) { Resources.traderPrice = 69420; } }
         if (typeof GodMode.Enabled === "boolean") { if (GodMode.Enabled) {var throughput = 0; } else { var throughput = 1; } }
-        if (typeof Blacklist.Value === "boolean") { if (Blacklist.Value) { botConfig.pmc.dynamicLoot.blacklist.push("HShieldEvade","HShieldTG","HShieldUSEC","HShieldYellow","HShieldUntar","HShieldRed","HShieldWhite","HShieldRivals","HShieldAlpha","HShieldRFArmy","HShieldTrainHard","HShieldGreen","HShieldBlue","HShieldKiba","HShieldDead","HShieldLabs","HShieldBear"); }}
+        if (typeof Blacklist.Value === "boolean") { if (Blacklist.Value) { 
+            botConfig.pmc.vestLoot.blacklist.push("HShieldEvade","HShieldTG","HShieldUSEC","HShieldYellow","HShieldUntar","HShieldRed","HShieldWhite","HShieldRivals","HShieldAlpha","HShieldRFArmy","HShieldTrainHard","HShieldGreen","HShieldBlue","HShieldKiba","HShieldDead","HShieldLabs","HShieldBear"); 
+            botConfig.pmc.pocketLoot.blacklist.push("HShieldEvade","HShieldTG","HShieldUSEC","HShieldYellow","HShieldUntar","HShieldRed","HShieldWhite","HShieldRivals","HShieldAlpha","HShieldRFArmy","HShieldTrainHard","HShieldGreen","HShieldBlue","HShieldKiba","HShieldDead","HShieldLabs","HShieldBear");
+            botConfig.pmc.backpackLoot.blacklist.push("HShieldEvade","HShieldTG","HShieldUSEC","HShieldYellow","HShieldUntar","HShieldRed","HShieldWhite","HShieldRivals","HShieldAlpha","HShieldRFArmy","HShieldTrainHard","HShieldGreen","HShieldBlue","HShieldKiba","HShieldDead","HShieldLabs","HShieldBear");
+            }
+        }
 
         db.templates.items["HShieldEvade"]._props.RepairCost = Resources.RepairCost;
         db.templates.items["HShieldEvade"]._props.Durability = Resources.Durability;
