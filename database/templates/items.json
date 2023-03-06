@@ -3,7 +3,7 @@
 		"HShieldEvade": {
 			"_id": "HShieldEvade",
 			"_name": "HShieldEvade",
-			"_parent": "5a341c4086f77401f2541505",
+			"_parent": "57bef4c42459772e8d35a53b",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield",
@@ -77,14 +77,9 @@
 				"speedPenaltyPercent": 0,
 				"mousePenalty": 0,
 				"weaponErgonomicPenalty": 0,
-				"armorZone": [
-					"Head"
-				],
+				"armorZone": [],
 				"Indestructibility": 0.9,
-				"headSegments": [
-					"Top",
-					"Nape"
-				],
+				"headSegments": [],
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
@@ -97,14 +92,15 @@
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
 				"ArmorMaterial": "UHMWPE",
-				"BlindnessProtection": 0
+				"BlindnessProtection": 0,
+				"ArmorType": "None"
 			},
-			"_proto": "545cdb794bdc2d3a198b456a"
+			"_proto": "5b3f15d486f77432d0509248"
 		},
 		"HShieldTG": {
 			"_id": "HShieldTG",
 			"_name": "HShieldTG",
-			"_parent": "5a341c4086f77401f2541505",
+			"_parent": "57bef4c42459772e8d35a53b",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (TerraGroup)",
@@ -178,14 +174,9 @@
 				"speedPenaltyPercent": 0,
 				"mousePenalty": 0,
 				"weaponErgonomicPenalty": 0,
-				"armorZone": [
-					"Head"
-				],
+				"armorZone": [],
 				"Indestructibility": 0.9,
-				"headSegments": [
-					"Top",
-					"Nape"
-				],
+				"headSegments": [],
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
@@ -198,14 +189,15 @@
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
 				"ArmorMaterial": "UHMWPE",
-				"BlindnessProtection": 0
+				"BlindnessProtection": 0,
+				"ArmorType": "None"
 			},
-			"_proto": "545cdb794bdc2d3a198b456a"
+			"_proto": "5b3f15d486f77432d0509248"
 		},
 		"HShieldUSEC": {
 			"_id": "HShieldUSEC",
 			"_name": "HShieldUSEC",
-			"_parent": "5a341c4086f77401f2541505",
+			"_parent": "57bef4c42459772e8d35a53b",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (USEC)",
@@ -279,14 +271,9 @@
 				"speedPenaltyPercent": 0,
 				"mousePenalty": 0,
 				"weaponErgonomicPenalty": 0,
-				"armorZone": [
-					"Head"
-				],
+				"armorZone": [],
 				"Indestructibility": 0.9,
-				"headSegments": [
-					"Top",
-					"Nape"
-				],
+				"headSegments": [],
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
@@ -299,14 +286,15 @@
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
 				"ArmorMaterial": "UHMWPE",
-				"BlindnessProtection": 0
+				"BlindnessProtection": 0,
+				"ArmorType": "None"
 			},
-			"_proto": "545cdb794bdc2d3a198b456a"
+			"_proto": "5b3f15d486f77432d0509248"
 		},
 		"HShieldYellow": {
 			"_id": "HShieldYellow",
 			"_name": "HShieldYellow",
-			"_parent": "5a341c4086f77401f2541505",
+			"_parent": "57bef4c42459772e8d35a53b",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (Yellow)",
@@ -380,14 +368,9 @@
 				"speedPenaltyPercent": 0,
 				"mousePenalty": 0,
 				"weaponErgonomicPenalty": 0,
-				"armorZone": [
-					"Head"
-				],
+				"armorZone": [],
 				"Indestructibility": 0.9,
-				"headSegments": [
-					"Top",
-					"Nape"
-				],
+				"headSegments": [],
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
@@ -400,14 +383,15 @@
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
 				"ArmorMaterial": "UHMWPE",
-				"BlindnessProtection": 0
+				"BlindnessProtection": 0,
+				"ArmorType": "None"
 			},
-			"_proto": "545cdb794bdc2d3a198b456a"
+			"_proto": "5b3f15d486f77432d0509248"
 		},
 		"HShieldUntar": {
 			"_id": "HShieldUntar",
 			"_name": "HShieldUntar",
-			"_parent": "5a341c4086f77401f2541505",
+			"_parent": "57bef4c42459772e8d35a53b",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (Untar)",
@@ -481,14 +465,9 @@
 				"speedPenaltyPercent": 0,
 				"mousePenalty": 0,
 				"weaponErgonomicPenalty": 0,
-				"armorZone": [
-					"Head"
-				],
+				"armorZone": [],
 				"Indestructibility": 0.9,
-				"headSegments": [
-					"Top",
-					"Nape"
-				],
+				"headSegments": [],
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
@@ -501,14 +480,15 @@
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
 				"ArmorMaterial": "UHMWPE",
-				"BlindnessProtection": 0
+				"BlindnessProtection": 0,
+				"ArmorType": "None"
 			},
-			"_proto": "545cdb794bdc2d3a198b456a"
+			"_proto": "5b3f15d486f77432d0509248"
 		},
 		"HShieldRed": {
 			"_id": "HShieldRed",
 			"_name": "HShieldRed",
-			"_parent": "5a341c4086f77401f2541505",
+			"_parent": "57bef4c42459772e8d35a53b",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (Red)",
@@ -582,14 +562,9 @@
 				"speedPenaltyPercent": 0,
 				"mousePenalty": 0,
 				"weaponErgonomicPenalty": 0,
-				"armorZone": [
-					"Head"
-				],
+				"armorZone": [],
 				"Indestructibility": 0.9,
-				"headSegments": [
-					"Top",
-					"Nape"
-				],
+				"headSegments": [],
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
@@ -602,14 +577,15 @@
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
 				"ArmorMaterial": "UHMWPE",
-				"BlindnessProtection": 0
+				"BlindnessProtection": 0,
+				"ArmorType": "None"
 			},
-			"_proto": "545cdb794bdc2d3a198b456a"
+			"_proto": "5b3f15d486f77432d0509248"
 		},
 		"HShieldWhite": {
 			"_id": "HShieldWhite",
 			"_name": "HShieldWhite",
-			"_parent": "5a341c4086f77401f2541505",
+			"_parent": "57bef4c42459772e8d35a53b",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (White)",
@@ -683,14 +659,9 @@
 				"speedPenaltyPercent": 0,
 				"mousePenalty": 0,
 				"weaponErgonomicPenalty": 0,
-				"armorZone": [
-					"Head"
-				],
+				"armorZone": [],
 				"Indestructibility": 0.9,
-				"headSegments": [
-					"Top",
-					"Nape"
-				],
+				"headSegments": [],
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
@@ -703,14 +674,15 @@
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
 				"ArmorMaterial": "UHMWPE",
-				"BlindnessProtection": 0
+				"BlindnessProtection": 0,
+				"ArmorType": "None"
 			},
-			"_proto": "545cdb794bdc2d3a198b456a"
+			"_proto": "5b3f15d486f77432d0509248"
 		},
 		"HShieldRivals": {
 			"_id": "HShieldRivals",
 			"_name": "HShieldRivals",
-			"_parent": "5a341c4086f77401f2541505",
+			"_parent": "57bef4c42459772e8d35a53b",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (Rivals)",
@@ -784,14 +756,9 @@
 				"speedPenaltyPercent": 0,
 				"mousePenalty": 0,
 				"weaponErgonomicPenalty": 0,
-				"armorZone": [
-					"Head"
-				],
+				"armorZone": [],
 				"Indestructibility": 0.9,
-				"headSegments": [
-					"Top",
-					"Nape"
-				],
+				"headSegments": [],
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
@@ -804,14 +771,15 @@
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
 				"ArmorMaterial": "UHMWPE",
-				"BlindnessProtection": 0
+				"BlindnessProtection": 0,
+				"ArmorType": "None"
 			},
-			"_proto": "545cdb794bdc2d3a198b456a"
+			"_proto": "5b3f15d486f77432d0509248"
 		},
 		"HShieldAlpha": {
 			"_id": "HShieldAlpha",
 			"_name": "HShieldAlpha",
-			"_parent": "5a341c4086f77401f2541505",
+			"_parent": "57bef4c42459772e8d35a53b",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (Alpha)",
@@ -885,14 +853,9 @@
 				"speedPenaltyPercent": 0,
 				"mousePenalty": 0,
 				"weaponErgonomicPenalty": 0,
-				"armorZone": [
-					"Head"
-				],
+				"armorZone": [],
 				"Indestructibility": 0.9,
-				"headSegments": [
-					"Top",
-					"Nape"
-				],
+				"headSegments": [],
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
@@ -905,14 +868,15 @@
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
 				"ArmorMaterial": "UHMWPE",
-				"BlindnessProtection": 0
+				"BlindnessProtection": 0,
+				"ArmorType": "None"
 			},
-			"_proto": "545cdb794bdc2d3a198b456a"
+			"_proto": "5b3f15d486f77432d0509248"
 		},
 		"HShieldRFArmy": {
 			"_id": "HShieldRFArmy",
 			"_name": "HShieldRFArmy",
-			"_parent": "5a341c4086f77401f2541505",
+			"_parent": "57bef4c42459772e8d35a53b",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (RF Army)",
@@ -986,14 +950,9 @@
 				"speedPenaltyPercent": 0,
 				"mousePenalty": 0,
 				"weaponErgonomicPenalty": 0,
-				"armorZone": [
-					"Head"
-				],
+				"armorZone": [],
 				"Indestructibility": 0.9,
-				"headSegments": [
-					"Top",
-					"Nape"
-				],
+				"headSegments": [],
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
@@ -1006,14 +965,15 @@
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
 				"ArmorMaterial": "UHMWPE",
-				"BlindnessProtection": 0
+				"BlindnessProtection": 0,
+				"ArmorType": "None"
 			},
-			"_proto": "545cdb794bdc2d3a198b456a"
+			"_proto": "5b3f15d486f77432d0509248"
 		},
 		"HShieldTrainHard": {
 			"_id": "HShieldTrainHard",
 			"_name": "HShieldTrainHard",
-			"_parent": "5a341c4086f77401f2541505",
+			"_parent": "57bef4c42459772e8d35a53b",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (Train Hard)",
@@ -1087,14 +1047,9 @@
 				"speedPenaltyPercent": 0,
 				"mousePenalty": 0,
 				"weaponErgonomicPenalty": 0,
-				"armorZone": [
-					"Head"
-				],
+				"armorZone": [],
 				"Indestructibility": 0.9,
-				"headSegments": [
-					"Top",
-					"Nape"
-				],
+				"headSegments": [],
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
@@ -1107,14 +1062,15 @@
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
 				"ArmorMaterial": "UHMWPE",
-				"BlindnessProtection": 0
+				"BlindnessProtection": 0,
+				"ArmorType": "None"
 			},
-			"_proto": "545cdb794bdc2d3a198b456a"
+			"_proto": "5b3f15d486f77432d0509248"
 		},
 		"HShieldGreen": {
 			"_id": "HShieldGreen",
 			"_name": "HShieldGreen",
-			"_parent": "5a341c4086f77401f2541505",
+			"_parent": "57bef4c42459772e8d35a53b",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (Green)",
@@ -1188,14 +1144,9 @@
 				"speedPenaltyPercent": 0,
 				"mousePenalty": 0,
 				"weaponErgonomicPenalty": 0,
-				"armorZone": [
-					"Head"
-				],
+				"armorZone": [],
 				"Indestructibility": 0.9,
-				"headSegments": [
-					"Top",
-					"Nape"
-				],
+				"headSegments": [],
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
@@ -1208,14 +1159,15 @@
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
 				"ArmorMaterial": "UHMWPE",
-				"BlindnessProtection": 0
+				"BlindnessProtection": 0,
+				"ArmorType": "None"
 			},
-			"_proto": "545cdb794bdc2d3a198b456a"
+			"_proto": "5b3f15d486f77432d0509248"
 		},
 		"HShieldBlue": {
 			"_id": "HShieldBlue",
 			"_name": "HShieldBlue",
-			"_parent": "5a341c4086f77401f2541505",
+			"_parent": "57bef4c42459772e8d35a53b",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (Blue)",
@@ -1289,14 +1241,9 @@
 				"speedPenaltyPercent": 0,
 				"mousePenalty": 0,
 				"weaponErgonomicPenalty": 0,
-				"armorZone": [
-					"Head"
-				],
+				"armorZone": [],
 				"Indestructibility": 0.9,
-				"headSegments": [
-					"Top",
-					"Nape"
-				],
+				"headSegments": [],
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
@@ -1309,14 +1256,15 @@
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
 				"ArmorMaterial": "UHMWPE",
-				"BlindnessProtection": 0
+				"BlindnessProtection": 0,
+				"ArmorType": "None"
 			},
-			"_proto": "545cdb794bdc2d3a198b456a"
+			"_proto": "5b3f15d486f77432d0509248"
 		},
 		"HShieldKiba": {
 			"_id": "HShieldKiba",
 			"_name": "HShieldKiba",
-			"_parent": "5a341c4086f77401f2541505",
+			"_parent": "57bef4c42459772e8d35a53b",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (KibaArms)",
@@ -1390,14 +1338,9 @@
 				"speedPenaltyPercent": 0,
 				"mousePenalty": 0,
 				"weaponErgonomicPenalty": 0,
-				"armorZone": [
-					"Head"
-				],
+				"armorZone": [],
 				"Indestructibility": 0.9,
-				"headSegments": [
-					"Top",
-					"Nape"
-				],
+				"headSegments": [],
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
@@ -1410,14 +1353,15 @@
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
 				"ArmorMaterial": "UHMWPE",
-				"BlindnessProtection": 0
+				"BlindnessProtection": 0,
+				"ArmorType": "None"
 			},
-			"_proto": "545cdb794bdc2d3a198b456a"
+			"_proto": "5b3f15d486f77432d0509248"
 		},
 		"HShieldDead": {
 			"_id": "HShieldDead",
 			"_name": "HShieldDead",
-			"_parent": "5a341c4086f77401f2541505",
+			"_parent": "57bef4c42459772e8d35a53b",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (DeadSkul)",
@@ -1491,14 +1435,9 @@
 				"speedPenaltyPercent": 0,
 				"mousePenalty": 0,
 				"weaponErgonomicPenalty": 0,
-				"armorZone": [
-					"Head"
-				],
+				"armorZone": [],
 				"Indestructibility": 0.9,
-				"headSegments": [
-					"Top",
-					"Nape"
-				],
+				"headSegments": [],
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
@@ -1511,14 +1450,15 @@
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
 				"ArmorMaterial": "UHMWPE",
-				"BlindnessProtection": 0
+				"BlindnessProtection": 0,
+				"ArmorType": "None"
 			},
-			"_proto": "545cdb794bdc2d3a198b456a"
+			"_proto": "5b3f15d486f77432d0509248"
 		},
 		"HShieldLabs": {
 			"_id": "HShieldLabs",
 			"_name": "HShieldLabs",
-			"_parent": "5a341c4086f77401f2541505",
+			"_parent": "57bef4c42459772e8d35a53b",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (Labs)",
@@ -1592,14 +1532,9 @@
 				"speedPenaltyPercent": 0,
 				"mousePenalty": 0,
 				"weaponErgonomicPenalty": 0,
-				"armorZone": [
-					"Head"
-				],
+				"armorZone": [],
 				"Indestructibility": 0.9,
-				"headSegments": [
-					"Top",
-					"Nape"
-				],
+				"headSegments": [],
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
@@ -1612,14 +1547,15 @@
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
 				"ArmorMaterial": "UHMWPE",
-				"BlindnessProtection": 0
+				"BlindnessProtection": 0,
+				"ArmorType": "None"
 			},
-			"_proto": "545cdb794bdc2d3a198b456a"
+			"_proto": "5b3f15d486f77432d0509248"
 		},
 		"HShieldBear": {
 			"_id": "HShieldBear",
 			"_name": "HShieldBear",
-			"_parent": "5a341c4086f77401f2541505",
+			"_parent": "57bef4c42459772e8d35a53b",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (Bear)",
@@ -1693,14 +1629,9 @@
 				"speedPenaltyPercent": 0,
 				"mousePenalty": 0,
 				"weaponErgonomicPenalty": 0,
-				"armorZone": [
-					"Head"
-				],
+				"armorZone": [],
 				"Indestructibility": 0.9,
-				"headSegments": [
-					"Top",
-					"Nape"
-				],
+				"headSegments": [],
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
@@ -1713,9 +1644,10 @@
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
 				"ArmorMaterial": "UHMWPE",
-				"BlindnessProtection": 0
+				"BlindnessProtection": 0,
+				"ArmorType": "None"
 			},
-			"_proto": "545cdb794bdc2d3a198b456a"
+			"_proto": "5b3f15d486f77432d0509248"
 		}
 	}
 }

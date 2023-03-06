@@ -1,6 +1,6 @@
 {
     "MainArmor": {
-        "_COMMENT": "What areas of the body do you want to protect?",
+        "_COMMENT": "What areas of the body do you want to protect? One or more of these options must be set to true.",
         "Head": false,
         "Thorax": false,
         "Stomach": false,
@@ -10,7 +10,8 @@
         "RightLeg": false
     },
     "HeadAreas": {
-        "_COMMENT": "Enable this only if you want only particular areas protected, otherwire Head: true is enough",
+        "_COMMENT": "Enable these only if you want particular areas to be protected, otherwise 'Head: true' is enough to protect your head.",
+        "_Notice": "This section is only valid if 'Head' is set to 'true'.",
         "Top": false,
         "Nape": false,
         "LowerNape": false,
@@ -20,12 +21,13 @@
     },
     "Resources": {
         "_COMMENT": "Self-explanatory section.",
-        "RepairCost": 1005,
+        "_Suggestion": "Keep repair cost at or below 100 unless you want the cost to go far beyond what you can afford.",
+        "RepairCost": 50,
         "Durability": 1500,
-        "traderPrice": 141592
+        "traderPrice": 79000
     },
     "GodMode": {
-        "_COMMENT": "Enable this to disable penetration of armor. (i.e., 0 throughput)",
+        "_COMMENT": "Enable this to disable penetration of armor. (i.e., enabled = 0 throughput)",
         "Enabled": false
     },
     "Blacklist": {

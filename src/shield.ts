@@ -1,8 +1,8 @@
 /**
  *      Name: Holtzman Shield
- *   Version: 350.0.1
+ *   Version: 350.0.2
  * Copyright: jbs4bmx
- *    Update: [DMY] 12.02.2023
+ *    Update: [DMY] 05.03.2023
 */
 
 import { DependencyContainer } from "tsyringe";
@@ -66,7 +66,7 @@ class Holtzman implements IPreAkiLoadMod, IPostDBLoadMod
                 for (const rb_item in hsdb.traders.Ragman.barter_scheme) {
                     db.traders[tradeName].assort.barter_scheme[rb_item] = hsdb.traders.Ragman.barter_scheme[rb_item];
                 }
-                for (const rl_item in hsdb.traders.Ragman.loyal_level_items){
+                for (const rl_item in hsdb.traders.Ragman.loyal_level_items) {
                     db.traders[tradeName].assort.loyal_level_items[rl_item] = hsdb.traders.Ragman.loyal_level_items[rl_item];
                 }
             }
