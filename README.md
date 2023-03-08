@@ -3,7 +3,7 @@
 This mod adds 17 new variants of armbands based loosely on the shield technology from the Novel/Movies "Dune". It adds armor protection for body parts as defined in the configuration file. You may alter the level of protection by editing the values found in the 'config.json' file within each of the variants.
 
 >Author         : jbs4bmx
->Contributor(s) : sugonyak
+>Contributor(s) : sugonyak, ShadowXtrex
 
 
 ### ==================================================
