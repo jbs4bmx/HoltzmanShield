@@ -82,7 +82,7 @@ class Holtzman implements IPreAkiLoadMod, IPostDBLoadMod
         const handBook = db.templates.handbook.Items;
         const priceList = db.templates.prices;
         const barterScheme = db.traders["5ac3b934156ae10c4430e83c"].assort.barter_scheme;
-        const { MainArmor, HeadAreas, Resources, GodMode, Blacklist } = require("./config.json");
+        const { MainArmor, HeadAreas, Resources, TypeOfArmor, MaterialOfArmor, GodMode, Blacklist } = require("./config.json");
 
         db.templates.items["55d7217a4bdc2d86028b456d"]._props.Slots[14]._props.filters[0].Filter.push(
             "HShieldEvade",
@@ -131,6 +131,240 @@ class Holtzman implements IPreAkiLoadMod, IPostDBLoadMod
                 botConfig.pmc.backpackLoot.blacklist.push("HShieldEvade","HShieldTG","HShieldUSEC","HShieldYellow","HShieldUntar","HShieldRed","HShieldWhite","HShieldRivals","HShieldAlpha","HShieldRFArmy","HShieldTrainHard","HShieldGreen","HShieldBlue","HShieldKiba","HShieldDead","HShieldLabs","HShieldBear");
             }
         }
+
+        if (typeof TypeOfArmor.Heavy === "boolean") {
+            if ( TypeOfArmor.Heavy ) {
+                db.templates.items["HShieldEvade"]._props.ArmorType = "Heavy";
+                db.templates.items["HShieldTG"]._props.ArmorType = "Heavy";
+                db.templates.items["HShieldUSEC"]._props.ArmorType = "Heavy";
+                db.templates.items["HShieldYellow"]._props.ArmorType = "Heavy";
+                db.templates.items["HShieldUntar"]._props.ArmorType = "Heavy";
+                db.templates.items["HShieldRed"]._props.ArmorType = "Heavy";
+                db.templates.items["HShieldWhite"]._props.ArmorType = "Heavy";
+                db.templates.items["HShieldRivals"]._props.ArmorType = "Heavy";
+                db.templates.items["HShieldAlpha"]._props.ArmorType = "Heavy";
+                db.templates.items["HShieldRFArmy"]._props.ArmorType = "Heavy";
+                db.templates.items["HShieldTrainHard"]._props.ArmorType = "Heavy";
+                db.templates.items["HShieldGreen"]._props.ArmorType = "Heavy";
+                db.templates.items["HShieldBlue"]._props.ArmorType = "Heavy";
+                db.templates.items["HShieldKiba"]._props.ArmorType = "Heavy";
+                db.templates.items["HShieldDead"]._props.ArmorType = "Heavy";
+                db.templates.items["HShieldLabs"]._props.ArmorType = "Heavy";
+                db.templates.items["HShieldBear"]._props.ArmorType = "Heavy";
+            }
+        }
+        if (typeof TypeOfArmor.Light === "boolean") {
+            if ( TypeOfArmor.Light ) {
+                db.templates.items["HShieldEvade"]._props.ArmorType = "Light";
+                db.templates.items["HShieldTG"]._props.ArmorType = "Light";
+                db.templates.items["HShieldUSEC"]._props.ArmorType = "Light";
+                db.templates.items["HShieldYellow"]._props.ArmorType = "Light";
+                db.templates.items["HShieldUntar"]._props.ArmorType = "Light";
+                db.templates.items["HShieldRed"]._props.ArmorType = "Light";
+                db.templates.items["HShieldWhite"]._props.ArmorType = "Light";
+                db.templates.items["HShieldRivals"]._props.ArmorType = "Light";
+                db.templates.items["HShieldAlpha"]._props.ArmorType = "Light";
+                db.templates.items["HShieldRFArmy"]._props.ArmorType = "Light";
+                db.templates.items["HShieldTrainHard"]._props.ArmorType = "Light";
+                db.templates.items["HShieldGreen"]._props.ArmorType = "Light";
+                db.templates.items["HShieldBlue"]._props.ArmorType = "Light";
+                db.templates.items["HShieldKiba"]._props.ArmorType = "Light";
+                db.templates.items["HShieldDead"]._props.ArmorType = "Light";
+                db.templates.items["HShieldLabs"]._props.ArmorType = "Light";
+                db.templates.items["HShieldBear"]._props.ArmorType = "Light";
+            }
+        }
+        if (typeof TypeOfArmor.None === "boolean") {
+            if ( TypeOfArmor.None ) {
+                db.templates.items["HShieldEvade"]._props.ArmorType = "None";
+                db.templates.items["HShieldTG"]._props.ArmorType = "None";
+                db.templates.items["HShieldUSEC"]._props.ArmorType = "None";
+                db.templates.items["HShieldYellow"]._props.ArmorType = "None";
+                db.templates.items["HShieldUntar"]._props.ArmorType = "None";
+                db.templates.items["HShieldRed"]._props.ArmorType = "None";
+                db.templates.items["HShieldWhite"]._props.ArmorType = "None";
+                db.templates.items["HShieldRivals"]._props.ArmorType = "None";
+                db.templates.items["HShieldAlpha"]._props.ArmorType = "None";
+                db.templates.items["HShieldRFArmy"]._props.ArmorType = "None";
+                db.templates.items["HShieldTrainHard"]._props.ArmorType = "None";
+                db.templates.items["HShieldGreen"]._props.ArmorType = "None";
+                db.templates.items["HShieldBlue"]._props.ArmorType = "None";
+                db.templates.items["HShieldKiba"]._props.ArmorType = "None";
+                db.templates.items["HShieldDead"]._props.ArmorType = "None";
+                db.templates.items["HShieldLabs"]._props.ArmorType = "None";
+                db.templates.items["HShieldBear"]._props.ArmorType = "None";
+            }
+        }
+
+        if (typeof MaterialOfArmor.UHMWPE === "boolean" ) {
+            if ( MaterialOfArmor.UHMWPE ) {
+                db.templates.items["HShieldEvade"]._props.ArmorMaterial = "UHMWPE";
+                db.templates.items["HShieldTG"]._props.ArmorMaterial = "UHMWPE";
+                db.templates.items["HShieldUSEC"]._props.ArmorMaterial = "UHMWPE";
+                db.templates.items["HShieldYellow"]._props.ArmorMaterial = "UHMWPE";
+                db.templates.items["HShieldUntar"]._props.ArmorMaterial = "UHMWPE";
+                db.templates.items["HShieldRed"]._props.ArmorMaterial = "UHMWPE";
+                db.templates.items["HShieldWhite"]._props.ArmorMaterial = "UHMWPE";
+                db.templates.items["HShieldRivals"]._props.ArmorMaterial = "UHMWPE";
+                db.templates.items["HShieldAlpha"]._props.ArmorMaterial = "UHMWPE";
+                db.templates.items["HShieldRFArmy"]._props.ArmorMaterial = "UHMWPE";
+                db.templates.items["HShieldTrainHard"]._props.ArmorMaterial = "UHMWPE";
+                db.templates.items["HShieldGreen"]._props.ArmorMaterial = "UHMWPE";
+                db.templates.items["HShieldBlue"]._props.ArmorMaterial = "UHMWPE";
+                db.templates.items["HShieldKiba"]._props.ArmorMaterial = "UHMWPE";
+                db.templates.items["HShieldDead"]._props.ArmorMaterial = "UHMWPE";
+                db.templates.items["HShieldLabs"]._props.ArmorMaterial = "UHMWPE";
+                db.templates.items["HShieldBear"]._props.ArmorMaterial = "UHMWPE";
+            }
+        }
+        if (typeof MaterialOfArmor.Aramid === "boolean" ) {
+            if ( MaterialOfArmor.Aramid ) {
+                db.templates.items["HShieldEvade"]._props.ArmorMaterial = "Aramid";
+                db.templates.items["HShieldTG"]._props.ArmorMaterial = "Aramid";
+                db.templates.items["HShieldUSEC"]._props.ArmorMaterial = "Aramid";
+                db.templates.items["HShieldYellow"]._props.ArmorMaterial = "Aramid";
+                db.templates.items["HShieldUntar"]._props.ArmorMaterial = "Aramid";
+                db.templates.items["HShieldRed"]._props.ArmorMaterial = "Aramid";
+                db.templates.items["HShieldWhite"]._props.ArmorMaterial = "Aramid";
+                db.templates.items["HShieldRivals"]._props.ArmorMaterial = "Aramid";
+                db.templates.items["HShieldAlpha"]._props.ArmorMaterial = "Aramid";
+                db.templates.items["HShieldRFArmy"]._props.ArmorMaterial = "Aramid";
+                db.templates.items["HShieldTrainHard"]._props.ArmorMaterial = "Aramid";
+                db.templates.items["HShieldGreen"]._props.ArmorMaterial = "Aramid";
+                db.templates.items["HShieldBlue"]._props.ArmorMaterial = "Aramid";
+                db.templates.items["HShieldKiba"]._props.ArmorMaterial = "Aramid";
+                db.templates.items["HShieldDead"]._props.ArmorMaterial = "Aramid";
+                db.templates.items["HShieldLabs"]._props.ArmorMaterial = "Aramid";
+                db.templates.items["HShieldBear"]._props.ArmorMaterial = "Aramid";
+            }
+        }
+        if (typeof MaterialOfArmor.Combined === "boolean" ) {
+            if ( MaterialOfArmor.Combined ) {
+                db.templates.items["HShieldEvade"]._props.ArmorMaterial = "Combined";
+                db.templates.items["HShieldTG"]._props.ArmorMaterial = "Combined";
+                db.templates.items["HShieldUSEC"]._props.ArmorMaterial = "Combined";
+                db.templates.items["HShieldYellow"]._props.ArmorMaterial = "Combined";
+                db.templates.items["HShieldUntar"]._props.ArmorMaterial = "Combined";
+                db.templates.items["HShieldRed"]._props.ArmorMaterial = "Combined";
+                db.templates.items["HShieldWhite"]._props.ArmorMaterial = "Combined";
+                db.templates.items["HShieldRivals"]._props.ArmorMaterial = "Combined";
+                db.templates.items["HShieldAlpha"]._props.ArmorMaterial = "Combined";
+                db.templates.items["HShieldRFArmy"]._props.ArmorMaterial = "Combined";
+                db.templates.items["HShieldTrainHard"]._props.ArmorMaterial = "Combined";
+                db.templates.items["HShieldGreen"]._props.ArmorMaterial = "Combined";
+                db.templates.items["HShieldBlue"]._props.ArmorMaterial = "Combined";
+                db.templates.items["HShieldKiba"]._props.ArmorMaterial = "Combined";
+                db.templates.items["HShieldDead"]._props.ArmorMaterial = "Combined";
+                db.templates.items["HShieldLabs"]._props.ArmorMaterial = "Combined";
+                db.templates.items["HShieldBear"]._props.ArmorMaterial = "Combined";
+            }
+        }
+        if (typeof MaterialOfArmor.Titan === "boolean" ) {
+            if ( MaterialOfArmor.Titan ) {
+                db.templates.items["HShieldEvade"]._props.ArmorMaterial = "Titan";
+                db.templates.items["HShieldTG"]._props.ArmorMaterial = "Titan";
+                db.templates.items["HShieldUSEC"]._props.ArmorMaterial = "Titan";
+                db.templates.items["HShieldYellow"]._props.ArmorMaterial = "Titan";
+                db.templates.items["HShieldUntar"]._props.ArmorMaterial = "Titan";
+                db.templates.items["HShieldRed"]._props.ArmorMaterial = "Titan";
+                db.templates.items["HShieldWhite"]._props.ArmorMaterial = "Titan";
+                db.templates.items["HShieldRivals"]._props.ArmorMaterial = "Titan";
+                db.templates.items["HShieldAlpha"]._props.ArmorMaterial = "Titan";
+                db.templates.items["HShieldRFArmy"]._props.ArmorMaterial = "Titan";
+                db.templates.items["HShieldTrainHard"]._props.ArmorMaterial = "Titan";
+                db.templates.items["HShieldGreen"]._props.ArmorMaterial = "Titan";
+                db.templates.items["HShieldBlue"]._props.ArmorMaterial = "Titan";
+                db.templates.items["HShieldKiba"]._props.ArmorMaterial = "Titan";
+                db.templates.items["HShieldDead"]._props.ArmorMaterial = "Titan";
+                db.templates.items["HShieldLabs"]._props.ArmorMaterial = "Titan";
+                db.templates.items["HShieldBear"]._props.ArmorMaterial = "Titan";
+            }
+        }
+        if (typeof MaterialOfArmor.Aluminium === "boolean" ) {
+            if ( MaterialOfArmor.Aluminium ) {
+                db.templates.items["HShieldEvade"]._props.ArmorMaterial = "Aluminium";
+                db.templates.items["HShieldTG"]._props.ArmorMaterial = "Aluminium";
+                db.templates.items["HShieldUSEC"]._props.ArmorMaterial = "Aluminium";
+                db.templates.items["HShieldYellow"]._props.ArmorMaterial = "Aluminium";
+                db.templates.items["HShieldUntar"]._props.ArmorMaterial = "Aluminium";
+                db.templates.items["HShieldRed"]._props.ArmorMaterial = "Aluminium";
+                db.templates.items["HShieldWhite"]._props.ArmorMaterial = "Aluminium";
+                db.templates.items["HShieldRivals"]._props.ArmorMaterial = "Aluminium";
+                db.templates.items["HShieldAlpha"]._props.ArmorMaterial = "Aluminium";
+                db.templates.items["HShieldRFArmy"]._props.ArmorMaterial = "Aluminium";
+                db.templates.items["HShieldTrainHard"]._props.ArmorMaterial = "Aluminium";
+                db.templates.items["HShieldGreen"]._props.ArmorMaterial = "Aluminium";
+                db.templates.items["HShieldBlue"]._props.ArmorMaterial = "Aluminium";
+                db.templates.items["HShieldKiba"]._props.ArmorMaterial = "Aluminium";
+                db.templates.items["HShieldDead"]._props.ArmorMaterial = "Aluminium";
+                db.templates.items["HShieldLabs"]._props.ArmorMaterial = "Aluminium";
+                db.templates.items["HShieldBear"]._props.ArmorMaterial = "Aluminium";
+            }
+        }
+        if (typeof MaterialOfArmor.ArmoredSteel === "boolean" ) {
+            if ( MaterialOfArmor.ArmoredSteel ) {
+                db.templates.items["HShieldEvade"]._props.ArmorMaterial = "ArmoredSteel";
+                db.templates.items["HShieldTG"]._props.ArmorMaterial = "ArmoredSteel";
+                db.templates.items["HShieldUSEC"]._props.ArmorMaterial = "ArmoredSteel";
+                db.templates.items["HShieldYellow"]._props.ArmorMaterial = "ArmoredSteel";
+                db.templates.items["HShieldUntar"]._props.ArmorMaterial = "ArmoredSteel";
+                db.templates.items["HShieldRed"]._props.ArmorMaterial = "ArmoredSteel";
+                db.templates.items["HShieldWhite"]._props.ArmorMaterial = "ArmoredSteel";
+                db.templates.items["HShieldRivals"]._props.ArmorMaterial = "ArmoredSteel";
+                db.templates.items["HShieldAlpha"]._props.ArmorMaterial = "ArmoredSteel";
+                db.templates.items["HShieldRFArmy"]._props.ArmorMaterial = "ArmoredSteel";
+                db.templates.items["HShieldTrainHard"]._props.ArmorMaterial = "ArmoredSteel";
+                db.templates.items["HShieldGreen"]._props.ArmorMaterial = "ArmoredSteel";
+                db.templates.items["HShieldBlue"]._props.ArmorMaterial = "ArmoredSteel";
+                db.templates.items["HShieldKiba"]._props.ArmorMaterial = "ArmoredSteel";
+                db.templates.items["HShieldDead"]._props.ArmorMaterial = "ArmoredSteel";
+                db.templates.items["HShieldLabs"]._props.ArmorMaterial = "ArmoredSteel";
+                db.templates.items["HShieldBear"]._props.ArmorMaterial = "ArmoredSteel";
+            }
+        }
+        if (typeof MaterialOfArmor.Ceramic === "boolean" ) {
+            if ( MaterialOfArmor.Ceramic ) {
+                db.templates.items["HShieldEvade"]._props.ArmorMaterial = "Ceramic";
+                db.templates.items["HShieldTG"]._props.ArmorMaterial = "Ceramic";
+                db.templates.items["HShieldUSEC"]._props.ArmorMaterial = "Ceramic";
+                db.templates.items["HShieldYellow"]._props.ArmorMaterial = "Ceramic";
+                db.templates.items["HShieldUntar"]._props.ArmorMaterial = "Ceramic";
+                db.templates.items["HShieldRed"]._props.ArmorMaterial = "Ceramic";
+                db.templates.items["HShieldWhite"]._props.ArmorMaterial = "Ceramic";
+                db.templates.items["HShieldRivals"]._props.ArmorMaterial = "Ceramic";
+                db.templates.items["HShieldAlpha"]._props.ArmorMaterial = "Ceramic";
+                db.templates.items["HShieldRFArmy"]._props.ArmorMaterial = "Ceramic";
+                db.templates.items["HShieldTrainHard"]._props.ArmorMaterial = "Ceramic";
+                db.templates.items["HShieldGreen"]._props.ArmorMaterial = "Ceramic";
+                db.templates.items["HShieldBlue"]._props.ArmorMaterial = "Ceramic";
+                db.templates.items["HShieldKiba"]._props.ArmorMaterial = "Ceramic";
+                db.templates.items["HShieldDead"]._props.ArmorMaterial = "Ceramic";
+                db.templates.items["HShieldLabs"]._props.ArmorMaterial = "Ceramic";
+                db.templates.items["HShieldBear"]._props.ArmorMaterial = "Ceramic";
+            }
+        }
+        if (typeof MaterialOfArmor.Glass === "boolean" ) {
+            if ( MaterialOfArmor.Glass ) {
+                db.templates.items["HShieldEvade"]._props.ArmorMaterial = "Glass";
+                db.templates.items["HShieldTG"]._props.ArmorMaterial = "Glass";
+                db.templates.items["HShieldUSEC"]._props.ArmorMaterial = "Glass";
+                db.templates.items["HShieldYellow"]._props.ArmorMaterial = "Glass";
+                db.templates.items["HShieldUntar"]._props.ArmorMaterial = "Glass";
+                db.templates.items["HShieldRed"]._props.ArmorMaterial = "Glass";
+                db.templates.items["HShieldWhite"]._props.ArmorMaterial = "Glass";
+                db.templates.items["HShieldRivals"]._props.ArmorMaterial = "Glass";
+                db.templates.items["HShieldAlpha"]._props.ArmorMaterial = "Glass";
+                db.templates.items["HShieldRFArmy"]._props.ArmorMaterial = "Glass";
+                db.templates.items["HShieldTrainHard"]._props.ArmorMaterial = "Glass";
+                db.templates.items["HShieldGreen"]._props.ArmorMaterial = "Glass";
+                db.templates.items["HShieldBlue"]._props.ArmorMaterial = "Glass";
+                db.templates.items["HShieldKiba"]._props.ArmorMaterial = "Glass";
+                db.templates.items["HShieldDead"]._props.ArmorMaterial = "Glass";
+                db.templates.items["HShieldLabs"]._props.ArmorMaterial = "Glass";
+                db.templates.items["HShieldBear"]._props.ArmorMaterial = "Glass";
+            }
+        }
+
 
         db.templates.items["HShieldEvade"]._props.RepairCost = Resources.RepairCost;
         db.templates.items["HShieldEvade"]._props.Durability = Resources.Durability;

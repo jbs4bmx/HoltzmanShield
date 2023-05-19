@@ -14,7 +14,6 @@
 				"Width": 1,
 				"Height": 1,
 				"StackMaxSize": 1,
-				"Rarity": "Superrare",
 				"SpawnChance": 1,
 				"ItemSound": "item_cloth_generic",
 				"Prefab": {
@@ -83,7 +82,7 @@
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
-				"MaterialType": "Helmet",
+				"MaterialType": "BodyArmor",
 				"RicochetParams": {
 					"x": 0.9,
 					"y": 0.5,
@@ -91,9 +90,9 @@
 				},
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
-				"ArmorMaterial": "UHMWPE",
+				"ArmorMaterial": "Titan",
 				"BlindnessProtection": 0,
-				"ArmorType": "None"
+				"ArmorType": "Heavy"
 			},
 			"_proto": "5b3f15d486f77432d0509248"
 		},
@@ -111,7 +110,6 @@
 				"Width": 1,
 				"Height": 1,
 				"StackMaxSize": 1,
-				"Rarity": "Superrare",
 				"SpawnChance": 1,
 				"ItemSound": "item_cloth_generic",
 				"Prefab": {
@@ -180,7 +178,7 @@
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
-				"MaterialType": "Helmet",
+				"MaterialType": "BodyArmor",
 				"RicochetParams": {
 					"x": 0.9,
 					"y": 0.5,
@@ -188,9 +186,9 @@
 				},
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
-				"ArmorMaterial": "UHMWPE",
+				"ArmorMaterial": "Titan",
 				"BlindnessProtection": 0,
-				"ArmorType": "None"
+				"ArmorType": "Heavy"
 			},
 			"_proto": "5b3f15d486f77432d0509248"
 		},
@@ -208,7 +206,6 @@
 				"Width": 1,
 				"Height": 1,
 				"StackMaxSize": 1,
-				"Rarity": "Superrare",
 				"SpawnChance": 1,
 				"ItemSound": "item_cloth_generic",
 				"Prefab": {
@@ -277,7 +274,7 @@
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
-				"MaterialType": "Helmet",
+				"MaterialType": "BodyArmor",
 				"RicochetParams": {
 					"x": 0.9,
 					"y": 0.5,
@@ -285,9 +282,9 @@
 				},
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
-				"ArmorMaterial": "UHMWPE",
+				"ArmorMaterial": "Titan",
 				"BlindnessProtection": 0,
-				"ArmorType": "None"
+				"ArmorType": "Heavy"
 			},
 			"_proto": "5b3f15d486f77432d0509248"
 		},
@@ -305,7 +302,6 @@
 				"Width": 1,
 				"Height": 1,
 				"StackMaxSize": 1,
-				"Rarity": "Superrare",
 				"SpawnChance": 1,
 				"ItemSound": "item_cloth_generic",
 				"Prefab": {
@@ -374,7 +370,7 @@
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
-				"MaterialType": "Helmet",
+				"MaterialType": "BodyArmor",
 				"RicochetParams": {
 					"x": 0.9,
 					"y": 0.5,
@@ -382,9 +378,9 @@
 				},
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
-				"ArmorMaterial": "UHMWPE",
+				"ArmorMaterial": "Titan",
 				"BlindnessProtection": 0,
-				"ArmorType": "None"
+				"ArmorType": "Heavy"
 			},
 			"_proto": "5b3f15d486f77432d0509248"
 		},
@@ -402,7 +398,6 @@
 				"Width": 1,
 				"Height": 1,
 				"StackMaxSize": 1,
-				"Rarity": "Superrare",
 				"SpawnChance": 1,
 				"ItemSound": "item_cloth_generic",
 				"Prefab": {
@@ -471,7 +466,7 @@
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
-				"MaterialType": "Helmet",
+				"MaterialType": "BodyArmor",
 				"RicochetParams": {
 					"x": 0.9,
 					"y": 0.5,
@@ -479,9 +474,9 @@
 				},
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
-				"ArmorMaterial": "UHMWPE",
+				"ArmorMaterial": "Titan",
 				"BlindnessProtection": 0,
-				"ArmorType": "None"
+				"ArmorType": "Heavy"
 			},
 			"_proto": "5b3f15d486f77432d0509248"
 		},
@@ -499,7 +494,6 @@
 				"Width": 1,
 				"Height": 1,
 				"StackMaxSize": 1,
-				"Rarity": "Superrare",
 				"SpawnChance": 1,
 				"ItemSound": "item_cloth_generic",
 				"Prefab": {
@@ -568,7 +562,7 @@
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
-				"MaterialType": "Helmet",
+				"MaterialType": "BodyArmor",
 				"RicochetParams": {
 					"x": 0.9,
 					"y": 0.5,
@@ -576,9 +570,9 @@
 				},
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
-				"ArmorMaterial": "UHMWPE",
+				"ArmorMaterial": "Titan",
 				"BlindnessProtection": 0,
-				"ArmorType": "None"
+				"ArmorType": "Heavy"
 			},
 			"_proto": "5b3f15d486f77432d0509248"
 		},
@@ -596,7 +590,6 @@
 				"Width": 1,
 				"Height": 1,
 				"StackMaxSize": 1,
-				"Rarity": "Superrare",
 				"SpawnChance": 1,
 				"ItemSound": "item_cloth_generic",
 				"Prefab": {
@@ -665,7 +658,7 @@
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
-				"MaterialType": "Helmet",
+				"MaterialType": "BodyArmor",
 				"RicochetParams": {
 					"x": 0.9,
 					"y": 0.5,
@@ -673,9 +666,9 @@
 				},
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
-				"ArmorMaterial": "UHMWPE",
+				"ArmorMaterial": "Titan",
 				"BlindnessProtection": 0,
-				"ArmorType": "None"
+				"ArmorType": "Heavy"
 			},
 			"_proto": "5b3f15d486f77432d0509248"
 		},
@@ -693,7 +686,6 @@
 				"Width": 1,
 				"Height": 1,
 				"StackMaxSize": 1,
-				"Rarity": "Superrare",
 				"SpawnChance": 1,
 				"ItemSound": "item_cloth_generic",
 				"Prefab": {
@@ -762,7 +754,7 @@
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
-				"MaterialType": "Helmet",
+				"MaterialType": "BodyArmor",
 				"RicochetParams": {
 					"x": 0.9,
 					"y": 0.5,
@@ -770,9 +762,9 @@
 				},
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
-				"ArmorMaterial": "UHMWPE",
+				"ArmorMaterial": "Titan",
 				"BlindnessProtection": 0,
-				"ArmorType": "None"
+				"ArmorType": "Heavy"
 			},
 			"_proto": "5b3f15d486f77432d0509248"
 		},
@@ -790,7 +782,6 @@
 				"Width": 1,
 				"Height": 1,
 				"StackMaxSize": 1,
-				"Rarity": "Superrare",
 				"SpawnChance": 1,
 				"ItemSound": "item_cloth_generic",
 				"Prefab": {
@@ -859,7 +850,7 @@
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
-				"MaterialType": "Helmet",
+				"MaterialType": "BodyArmor",
 				"RicochetParams": {
 					"x": 0.9,
 					"y": 0.5,
@@ -867,9 +858,9 @@
 				},
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
-				"ArmorMaterial": "UHMWPE",
+				"ArmorMaterial": "Titan",
 				"BlindnessProtection": 0,
-				"ArmorType": "None"
+				"ArmorType": "Heavy"
 			},
 			"_proto": "5b3f15d486f77432d0509248"
 		},
@@ -887,7 +878,6 @@
 				"Width": 1,
 				"Height": 1,
 				"StackMaxSize": 1,
-				"Rarity": "Superrare",
 				"SpawnChance": 1,
 				"ItemSound": "item_cloth_generic",
 				"Prefab": {
@@ -956,7 +946,7 @@
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
-				"MaterialType": "Helmet",
+				"MaterialType": "BodyArmor",
 				"RicochetParams": {
 					"x": 0.9,
 					"y": 0.5,
@@ -964,9 +954,9 @@
 				},
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
-				"ArmorMaterial": "UHMWPE",
+				"ArmorMaterial": "Titan",
 				"BlindnessProtection": 0,
-				"ArmorType": "None"
+				"ArmorType": "Heavy"
 			},
 			"_proto": "5b3f15d486f77432d0509248"
 		},
@@ -984,7 +974,6 @@
 				"Width": 1,
 				"Height": 1,
 				"StackMaxSize": 1,
-				"Rarity": "Superrare",
 				"SpawnChance": 1,
 				"ItemSound": "item_cloth_generic",
 				"Prefab": {
@@ -1053,7 +1042,7 @@
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
-				"MaterialType": "Helmet",
+				"MaterialType": "BodyArmor",
 				"RicochetParams": {
 					"x": 0.9,
 					"y": 0.5,
@@ -1061,9 +1050,9 @@
 				},
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
-				"ArmorMaterial": "UHMWPE",
+				"ArmorMaterial": "Titan",
 				"BlindnessProtection": 0,
-				"ArmorType": "None"
+				"ArmorType": "Heavy"
 			},
 			"_proto": "5b3f15d486f77432d0509248"
 		},
@@ -1081,7 +1070,6 @@
 				"Width": 1,
 				"Height": 1,
 				"StackMaxSize": 1,
-				"Rarity": "Superrare",
 				"SpawnChance": 1,
 				"ItemSound": "item_cloth_generic",
 				"Prefab": {
@@ -1150,7 +1138,7 @@
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
-				"MaterialType": "Helmet",
+				"MaterialType": "BodyArmor",
 				"RicochetParams": {
 					"x": 0.9,
 					"y": 0.5,
@@ -1158,9 +1146,9 @@
 				},
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
-				"ArmorMaterial": "UHMWPE",
+				"ArmorMaterial": "Titan",
 				"BlindnessProtection": 0,
-				"ArmorType": "None"
+				"ArmorType": "Heavy"
 			},
 			"_proto": "5b3f15d486f77432d0509248"
 		},
@@ -1178,7 +1166,6 @@
 				"Width": 1,
 				"Height": 1,
 				"StackMaxSize": 1,
-				"Rarity": "Superrare",
 				"SpawnChance": 1,
 				"ItemSound": "item_cloth_generic",
 				"Prefab": {
@@ -1247,7 +1234,7 @@
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
-				"MaterialType": "Helmet",
+				"MaterialType": "BodyArmor",
 				"RicochetParams": {
 					"x": 0.9,
 					"y": 0.5,
@@ -1255,9 +1242,9 @@
 				},
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
-				"ArmorMaterial": "UHMWPE",
+				"ArmorMaterial": "Titan",
 				"BlindnessProtection": 0,
-				"ArmorType": "None"
+				"ArmorType": "Heavy"
 			},
 			"_proto": "5b3f15d486f77432d0509248"
 		},
@@ -1275,7 +1262,6 @@
 				"Width": 1,
 				"Height": 1,
 				"StackMaxSize": 1,
-				"Rarity": "Superrare",
 				"SpawnChance": 1,
 				"ItemSound": "item_cloth_generic",
 				"Prefab": {
@@ -1344,7 +1330,7 @@
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
-				"MaterialType": "Helmet",
+				"MaterialType": "BodyArmor",
 				"RicochetParams": {
 					"x": 0.9,
 					"y": 0.5,
@@ -1352,9 +1338,9 @@
 				},
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
-				"ArmorMaterial": "UHMWPE",
+				"ArmorMaterial": "Titan",
 				"BlindnessProtection": 0,
-				"ArmorType": "None"
+				"ArmorType": "Heavy"
 			},
 			"_proto": "5b3f15d486f77432d0509248"
 		},
@@ -1372,7 +1358,6 @@
 				"Width": 1,
 				"Height": 1,
 				"StackMaxSize": 1,
-				"Rarity": "Superrare",
 				"SpawnChance": 1,
 				"ItemSound": "item_cloth_generic",
 				"Prefab": {
@@ -1441,7 +1426,7 @@
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
-				"MaterialType": "Helmet",
+				"MaterialType": "BodyArmor",
 				"RicochetParams": {
 					"x": 0.9,
 					"y": 0.5,
@@ -1449,9 +1434,9 @@
 				},
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
-				"ArmorMaterial": "UHMWPE",
+				"ArmorMaterial": "Titan",
 				"BlindnessProtection": 0,
-				"ArmorType": "None"
+				"ArmorType": "Heavy"
 			},
 			"_proto": "5b3f15d486f77432d0509248"
 		},
@@ -1469,7 +1454,6 @@
 				"Width": 1,
 				"Height": 1,
 				"StackMaxSize": 1,
-				"Rarity": "Superrare",
 				"SpawnChance": 1,
 				"ItemSound": "item_cloth_generic",
 				"Prefab": {
@@ -1538,7 +1522,7 @@
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
-				"MaterialType": "Helmet",
+				"MaterialType": "BodyArmor",
 				"RicochetParams": {
 					"x": 0.9,
 					"y": 0.5,
@@ -1546,9 +1530,9 @@
 				},
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
-				"ArmorMaterial": "UHMWPE",
+				"ArmorMaterial": "Titan",
 				"BlindnessProtection": 0,
-				"ArmorType": "None"
+				"ArmorType": "Heavy"
 			},
 			"_proto": "5b3f15d486f77432d0509248"
 		},
@@ -1566,7 +1550,6 @@
 				"Width": 1,
 				"Height": 1,
 				"StackMaxSize": 1,
-				"Rarity": "Superrare",
 				"SpawnChance": 1,
 				"ItemSound": "item_cloth_generic",
 				"Prefab": {
@@ -1635,7 +1618,7 @@
 				"FaceShieldComponent": false,
 				"FaceShieldMask": "NoMask",
 				"HasHinge": false,
-				"MaterialType": "Helmet",
+				"MaterialType": "BodyArmor",
 				"RicochetParams": {
 					"x": 0.9,
 					"y": 0.5,
@@ -1643,9 +1626,9 @@
 				},
 				"DeafStrength": "None",
 				"BluntThroughput": 0.10,
-				"ArmorMaterial": "UHMWPE",
+				"ArmorMaterial": "Titan",
 				"BlindnessProtection": 0,
-				"ArmorType": "None"
+				"ArmorType": "Heavy"
 			},
 			"_proto": "5b3f15d486f77432d0509248"
 		}
