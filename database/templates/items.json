@@ -3,7 +3,7 @@
 		"HShieldEvade": {
 			"_id": "HShieldEvade",
 			"_name": "HShieldEvade",
-			"_parent": "57bef4c42459772e8d35a53b",
+			"_parent": "5448e54d4bdc2dcc718b4568",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield",
@@ -99,7 +99,7 @@
 		"HShieldTG": {
 			"_id": "HShieldTG",
 			"_name": "HShieldTG",
-			"_parent": "57bef4c42459772e8d35a53b",
+			"_parent": "5448e54d4bdc2dcc718b4568",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (TerraGroup)",
@@ -195,7 +195,7 @@
 		"HShieldUSEC": {
 			"_id": "HShieldUSEC",
 			"_name": "HShieldUSEC",
-			"_parent": "57bef4c42459772e8d35a53b",
+			"_parent": "5448e54d4bdc2dcc718b4568",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (USEC)",
@@ -291,7 +291,7 @@
 		"HShieldYellow": {
 			"_id": "HShieldYellow",
 			"_name": "HShieldYellow",
-			"_parent": "57bef4c42459772e8d35a53b",
+			"_parent": "5448e54d4bdc2dcc718b4568",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (Yellow)",
@@ -387,7 +387,7 @@
 		"HShieldUntar": {
 			"_id": "HShieldUntar",
 			"_name": "HShieldUntar",
-			"_parent": "57bef4c42459772e8d35a53b",
+			"_parent": "5448e54d4bdc2dcc718b4568",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (Untar)",
@@ -483,7 +483,7 @@
 		"HShieldRed": {
 			"_id": "HShieldRed",
 			"_name": "HShieldRed",
-			"_parent": "57bef4c42459772e8d35a53b",
+			"_parent": "5448e54d4bdc2dcc718b4568",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (Red)",
@@ -579,7 +579,7 @@
 		"HShieldWhite": {
 			"_id": "HShieldWhite",
 			"_name": "HShieldWhite",
-			"_parent": "57bef4c42459772e8d35a53b",
+			"_parent": "5448e54d4bdc2dcc718b4568",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (White)",
@@ -675,7 +675,7 @@
 		"HShieldRivals": {
 			"_id": "HShieldRivals",
 			"_name": "HShieldRivals",
-			"_parent": "57bef4c42459772e8d35a53b",
+			"_parent": "5448e54d4bdc2dcc718b4568",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (Rivals)",
@@ -771,7 +771,7 @@
 		"HShieldAlpha": {
 			"_id": "HShieldAlpha",
 			"_name": "HShieldAlpha",
-			"_parent": "57bef4c42459772e8d35a53b",
+			"_parent": "5448e54d4bdc2dcc718b4568",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (Alpha)",
@@ -867,7 +867,7 @@
 		"HShieldRFArmy": {
 			"_id": "HShieldRFArmy",
 			"_name": "HShieldRFArmy",
-			"_parent": "57bef4c42459772e8d35a53b",
+			"_parent": "5448e54d4bdc2dcc718b4568",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (RF Army)",
@@ -963,7 +963,7 @@
 		"HShieldTrainHard": {
 			"_id": "HShieldTrainHard",
 			"_name": "HShieldTrainHard",
-			"_parent": "57bef4c42459772e8d35a53b",
+			"_parent": "5448e54d4bdc2dcc718b4568",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (Train Hard)",
@@ -1059,7 +1059,7 @@
 		"HShieldGreen": {
 			"_id": "HShieldGreen",
 			"_name": "HShieldGreen",
-			"_parent": "57bef4c42459772e8d35a53b",
+			"_parent": "5448e54d4bdc2dcc718b4568",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (Green)",
@@ -1155,7 +1155,7 @@
 		"HShieldBlue": {
 			"_id": "HShieldBlue",
 			"_name": "HShieldBlue",
-			"_parent": "57bef4c42459772e8d35a53b",
+			"_parent": "5448e54d4bdc2dcc718b4568",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (Blue)",
@@ -1251,7 +1251,7 @@
 		"HShieldKiba": {
 			"_id": "HShieldKiba",
 			"_name": "HShieldKiba",
-			"_parent": "57bef4c42459772e8d35a53b",
+			"_parent": "5448e54d4bdc2dcc718b4568",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (KibaArms)",
@@ -1347,7 +1347,7 @@
 		"HShieldDead": {
 			"_id": "HShieldDead",
 			"_name": "HShieldDead",
-			"_parent": "57bef4c42459772e8d35a53b",
+			"_parent": "5448e54d4bdc2dcc718b4568",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (DeadSkul)",
@@ -1443,7 +1443,7 @@
 		"HShieldLabs": {
 			"_id": "HShieldLabs",
 			"_name": "HShieldLabs",
-			"_parent": "57bef4c42459772e8d35a53b",
+			"_parent": "5448e54d4bdc2dcc718b4568",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (Labs)",
@@ -1539,7 +1539,7 @@
 		"HShieldBear": {
 			"_id": "HShieldBear",
 			"_name": "HShieldBear",
-			"_parent": "57bef4c42459772e8d35a53b",
+			"_parent": "5448e54d4bdc2dcc718b4568",
 			"_type": "Item",
 			"_props": {
 				"Name": "Holtzman Shield (Bear)",

@@ -9,9 +9,6 @@ import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
 import { ImporterUtil } from "@spt-aki/utils/ImporterUtil";
 import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
 import { PreAkiModLoader } from "@spt-aki/loaders/PreAkiModLoader";
-import { ConfigServer } from "@spt-aki/servers/ConfigServer";
-import { ConfigTypes } from "@spt-aki/models/enums/ConfigTypes";
-import { IBotConfig } from "@spt-aki/models/spt/config/IBotConfig";
 
 let hsdb;
 
@@ -39,7 +36,6 @@ class Holtzman implements IPreAkiLoadMod, IPostDBLoadMod
             if (!db.templates.handbook.Items.find(i=>i.Id == h_item.Id)) {
                 db.templates.handbook.Items.push(h_item);
             }
-
         }
 
         for (const localeID in locales) {
@@ -77,12 +73,10 @@ class Holtzman implements IPreAkiLoadMod, IPostDBLoadMod
     public setConfigOptions(container: DependencyContainer): void
     {
         const db = container.resolve<DatabaseServer>("DatabaseServer").getTables();
-        const configServer = container.resolve<ConfigServer>("ConfigServer");
-        const botConfig = configServer.getConfig<IBotConfig>(ConfigTypes.BOT);
         const handBook = db.templates.handbook.Items;
         const priceList = db.templates.prices;
         const barterScheme = db.traders["5ac3b934156ae10c4430e83c"].assort.barter_scheme;
-        const { MainArmor, HeadAreas, Resources, TypeOfArmor, MaterialOfArmor, GodMode, Blacklist } = require("./config.json");
+        const { MainArmor, HeadAreas, Resources, TypeOfArmor, MaterialOfArmor, GodMode } = require("./config.json");
 
         db.templates.items["55d7217a4bdc2d86028b456d"]._props.Slots[14]._props.filters[0].Filter.push(
             "HShieldEvade",
@@ -104,8 +98,9 @@ class Holtzman implements IPreAkiLoadMod, IPostDBLoadMod
             "HShieldBear"
         );
 
-        let armor = [];
-        let segments = [];
+        let armor: string[] = [];
+        let segments: string[] = [];
+        var throughput = 1;
 
         if (typeof MainArmor.Head === "boolean") { if (MainArmor.Head === true) { armor.push("Head"); } }
         if (typeof MainArmor.Thorax === "boolean") { if (MainArmor.Thorax === true) { armor.push("Chest"); } }
@@ -123,14 +118,7 @@ class Holtzman implements IPreAkiLoadMod, IPostDBLoadMod
         if (typeof Resources.RepairCost === "number") { if ((Resources.RepairCost < 1) || (Resources.RepairCost > 9999999)) { Resources.RepairCost = 1000; } }
         if (typeof Resources.Durability === "number") { if ((Resources.Durability < 1) || (Resources.Durability > 9999999)) { Resources.Durability = 1500; } }
         if (typeof Resources.traderPrice === "number") { if ((Resources.traderPrice < 1) || (Resources.traderPrice > 9999999)) { Resources.traderPrice = 69420; } }
-        if (typeof GodMode.Enabled === "boolean") { if (GodMode.Enabled) {var throughput = 0; } else { var throughput = 1; } }
-        if (typeof Blacklist.Value === "boolean") {
-            if (Blacklist.Value) {
-                botConfig.pmc.vestLoot.blacklist.push("HShieldEvade","HShieldTG","HShieldUSEC","HShieldYellow","HShieldUntar","HShieldRed","HShieldWhite","HShieldRivals","HShieldAlpha","HShieldRFArmy","HShieldTrainHard","HShieldGreen","HShieldBlue","HShieldKiba","HShieldDead","HShieldLabs","HShieldBear");
-                botConfig.pmc.pocketLoot.blacklist.push("HShieldEvade","HShieldTG","HShieldUSEC","HShieldYellow","HShieldUntar","HShieldRed","HShieldWhite","HShieldRivals","HShieldAlpha","HShieldRFArmy","HShieldTrainHard","HShieldGreen","HShieldBlue","HShieldKiba","HShieldDead","HShieldLabs","HShieldBear");
-                botConfig.pmc.backpackLoot.blacklist.push("HShieldEvade","HShieldTG","HShieldUSEC","HShieldYellow","HShieldUntar","HShieldRed","HShieldWhite","HShieldRivals","HShieldAlpha","HShieldRFArmy","HShieldTrainHard","HShieldGreen","HShieldBlue","HShieldKiba","HShieldDead","HShieldLabs","HShieldBear");
-            }
-        }
+        if (typeof GodMode.Enabled === "boolean") { if (GodMode.Enabled) { throughput = 0; } }
 
         if (typeof TypeOfArmor.Heavy === "boolean") {
             if ( TypeOfArmor.Heavy ) {
