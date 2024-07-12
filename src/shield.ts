@@ -2,24 +2,29 @@
  * Copyright: jbs4bmx
 */
 
+import { ConfigServer } from "@spt/servers/ConfigServer";
+import { ConfigTypes } from "@spt/models/enums/ConfigTypes";
+import { DatabaseServer } from "@spt/servers/DatabaseServer";
 import { DependencyContainer } from "tsyringe";
-import { IPreAkiLoadMod } from "@spt-aki/models/external/IPreAkiLoadMod";
-import { IPostDBLoadMod } from "@spt-aki/models/external/IPostDBLoadMod";
-import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
-import { ImporterUtil } from "@spt-aki/utils/ImporterUtil";
-import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
-import { PreAkiModLoader } from "@spt-aki/loaders/PreAkiModLoader";
-import { ConfigServer } from "@spt-aki/servers/ConfigServer";
-import { ConfigTypes } from "@spt-aki/models/enums/ConfigTypes";
-import { IBotConfig } from "@spt-aki/models/spt/config/IBotConfig";
-import { IPmcConfig } from "@spt-aki/models/spt/config/IPmcConfig";
-import { VFS } from "@spt-aki/utils/VFS";
+import { IBotConfig } from "@spt/models/spt/config/IBotConfig";
+import { IItemConfig } from "@spt/models/spt/config/IItemConfig";
+import { ILogger } from "@spt/models/spt/utils/ILogger";
+import { ImporterUtil } from "@spt/utils/ImporterUtil";
+import { IPmcConfig } from "@spt/models/spt/config/IPmcConfig";
+import { IPostDBLoadMod } from "@spt/models/external/IPostDBLoadMod";
+import { IPreSptLoadMod } from "@spt/models/external/IPreSptLoadMod";
+import { PreSptModLoader } from "@spt/loaders/PreSptModLoader";
+import { VFS } from "@spt/utils/VFS";
 import { jsonc } from "jsonc";
 import path from "path";
 
 let hsdb;
+let itemConfig: IItemConfig;
+let botConfig: IBotConfig;
+let pmcConfig: IPmcConfig;
+let configServer: ConfigServer;
 
-class Holtzman implements IPreAkiLoadMod, IPostDBLoadMod
+class Holtzman implements IPreSptLoadMod, IPostDBLoadMod
 {
     private pkg;
     private privatePath = require('path');
@@ -29,12 +34,12 @@ class Holtzman implements IPreAkiLoadMod, IPostDBLoadMod
     {
         const logger = container.resolve<ILogger>("WinstonLogger");
         const db = container.resolve<DatabaseServer>("DatabaseServer").getTables();
-        const preAkiModLoader = container.resolve<PreAkiModLoader>("PreAkiModLoader");
+        const preSptModLoader = container.resolve<PreSptModLoader>("PreSptModLoader");
         const databaseImporter = container.resolve<ImporterUtil>("ImporterUtil");
         const locales = db.locales.global;
         const handbook = db.templates.handbook.Items;
         this.pkg = require("../package.json");
-        hsdb = databaseImporter.loadRecursive(`${preAkiModLoader.getModPath(this.modName)}database/`);
+        hsdb = databaseImporter.loadRecursive(`${preSptModLoader.getModPath(this.modName)}database/`);
 
         for (const iItem in hsdb.dbItems.templates) {
             db.templates.items[iItem] = hsdb.dbItems.templates[iItem];
@@ -89,6 +94,7 @@ class Holtzman implements IPreAkiLoadMod, IPostDBLoadMod
         const configServer = container.resolve<ConfigServer>("ConfigServer");
         const botConfig = configServer.getConfig<IBotConfig>(ConfigTypes.BOT);
         const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
+        const itemConfig = configServer.getConfig<IItemConfig>(ConfigTypes.ITEM);
         const vfs = container.resolve<VFS>("VFS");
         const { ArmorCoverage, ArmorAmount, Resources, PreFab, GodMode, Blacklist } = jsonc.parse(vfs.readFile(path.resolve(__dirname, "../config.jsonc")));
 
@@ -148,6 +154,10 @@ class Holtzman implements IPreAkiLoadMod, IPostDBLoadMod
             }
         }
         switch ( selectedValue ) {
+            case "Evasion": {
+                db.templates.items["66087622e26587d9430a1cfb"]._props.path = "assets/content/items/equipment/armband/item_equipment_armband_evasion.bundle";
+                break;
+            }
             case "Alpha": {
                 db.templates.items["66087622e26587d9430a1cfb"]._props.path = "assets/content/items/equipment/armband/item_equipment_armband_alpha.bundle";
                 break;
@@ -212,6 +222,14 @@ class Holtzman implements IPreAkiLoadMod, IPostDBLoadMod
                 db.templates.items["66087622e26587d9430a1cfb"]._props.path = "assets/content/items/equipment/armband/item_equipment_armband_yellow.bundle";
                 break;
             }
+            case "Unheard": {
+                db.templates.items["66087622e26587d9430a1cfb"]._props.path = "assets/content/items/equipment/armband/item_equipment_armband_unheard.bundle";
+                break;
+            }
+            case "Arena": {
+                db.templates.items["66087622e26587d9430a1cfb"]._props.path = "assets/content/items/equipment/armband/item_equipment_armband_arena.bundle";
+                break;
+            }
             case "BlackDivision": {
                 //db.templates.items["66087622e26587d9430a1cfb"]._props.path = "assets/content/items/equipment/armband/item_equipment_armband_newItem.bundle";
                 break;
@@ -251,12 +269,24 @@ class Holtzman implements IPreAkiLoadMod, IPostDBLoadMod
         }
         //if (typeof GodMode.Penetration === "boolean") { if (GodMode.Penetration === true) { penPower = 0; } }
 
-        //Blacklist
-        if (typeof Blacklist.Enabled === "boolean") {
-            if (Blacklist.Enabled === true) {
-                pmcConfig.vestLoot.blacklist.push("66087622e26587d9430a1cfb");
-                pmcConfig.pocketLoot.blacklist.push("66087622e26587d9430a1cfb");
-                pmcConfig.backpackLoot.blacklist.push("66087622e26587d9430a1cfb");
+        //Blacklists
+        if (typeof Blacklist.pmc === "boolean") {
+            if (Blacklist.pmc === true) {
+                pmcConfig.vestLoot.blacklist.push("660877b848b061d3eca2579f");
+                pmcConfig.pocketLoot.blacklist.push("660877b848b061d3eca2579f");
+                pmcConfig.backpackLoot.blacklist.push("660877b848b061d3eca2579f");
+            }
+        }
+        if (typeof Blacklist.scav === "boolean") {
+            if (Blacklist.scav === true) {
+                //botConfig.vestLoot.blacklist.push("660877b848b061d3eca2579f");
+                //botConfig.pocketLoot.blacklist.push("660877b848b061d3eca2579f");
+                //botConfig.backpackLoot.blacklist.push("660877b848b061d3eca2579f");
+            }
+        }
+        if (typeof Blacklist.globalLoot === "boolean") {
+            if (Blacklist.globalLoot === true) {
+                itemConfig.blacklist.push("660877b848b061d3eca2579f");
             }
         }
     }
