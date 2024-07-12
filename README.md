@@ -1,11 +1,13 @@
 # Holtzman Shield
 
+
 ## Description
 This mod adds a new variant of armband based loosely on the shield technology from the Novel/Movies "Dune". It adds armor protection for body parts as defined in the configuration file. You may alter the level of protection by editing the values found in the 'config.json' file.
 
+
 ## Credits
 Author: jbs4bmx <br>
-Contributors: sugonyak, ShadowXtrex
+Contributors: n/a
 
 
 ## Armor
@@ -29,21 +31,22 @@ Values of **armorCollider** array assigned by Armor mod options.
 
 ## Installation
 ### How to Install this Mod.
-"[SPT]" = Your SPT-AKI folder path
+"[SPT]" = Your SPT folder path
    1. Extract the contents of the zip file into the root of your [SPT] folder.
-      - That's the same location as "Aki.Server.exe" and "Aki.Launcher.exe".
+      - That's the same location as "SPT.Server.exe" and "SPT.Launcher.exe".
    2. Edit the Config to adjust the values to your likeing.
-   3. Start Aki.Server.exe and wait until it fully loads.
-   4. Start Aki.Launcher.exe but do not launch the game.
+   3. Start SPT.Server.exe and wait until it fully loads.
+   4. Start SPT.Launcher.exe but do not launch the game.
    5. Run the cache cleaner found in the launcher's settings menu.
    6. Now you can launch the game and profit.
 
-## Common Questions
+### Common Questions
    1. Where do I report bugs found with the current version of the mod?
       - You can report bugs for the current version of this mod here: [HS Mod Page](https://hub.sp-tarkov.com/files/file/488-holtzman-shield/).
    2. Why can't I see the different prefab for the armband?
       - Make sure you only have one of the options set to true. The remaining prefab options should be false.
       - Before you launch the game, be sure to clear (delete) the cache files.
+
 
 ## Configuration Guide
 Edit '.\config.jsonc' file as desired. <br>
@@ -53,18 +56,18 @@ config.jsonc contents
     "ArmorCoverage": {
         // Customize Holtzman Shield armor protection areas.
         // This value must be true or false.
-        "Head": false,
-        "Neck": false,
-        "Eyes": false,
-        "Ears": false,
-        "Jaw": false,
-        "Arms": false,
-        "Front": false,
-        "Back": false,
-        "Sides": false,
-        "Pelvis": false,
-        "Buttocks": false,
-        "Legs": false
+        "Head": true,
+        "Neck": true,
+        "Eyes": true,
+        "Ears": true,
+        "Jaw": true,
+        "Arms": true,
+        "Front": true,
+        "Back": true,
+        "Sides": true,
+        "Pelvis": true,
+        "Buttocks": true,
+        "Legs": true
     },
     "ArmorAmount": {
         // Customize Holtzman Shield armor durability level.
@@ -80,7 +83,7 @@ config.jsonc contents
 
         // This is the amount of protection from bright lights.
         // This must be any number value between 0 and 1 (e.g., 0, 0.25, 0.5, 0.8, 1, etc.)
-        "BlindnessProtection": 0,
+        "BlindnessProtection": 1,
 
         // I recommend keeping this at or below 100
         // This must be a whole number ranging from 1-2000.
@@ -91,8 +94,8 @@ config.jsonc contents
         "traderLoyaltyLevel": 1
     },
     "PreFab": {
-        // Customize Holtzman Shield look (Default: Evasion).
-        // If more than one is set to 'true', then PreFab will revert back to default.
+        // If more than one is set to 'true', then PreFab will revert to default (Evasion).
+        "Evasion": true,
         "Alpha": false,
         "DeadSkul": false,
         "TrainHard": false,
@@ -109,24 +112,24 @@ config.jsonc contents
         "Red": false,
         "White": false,
         "Yellow": false,
-
-        // (WIP - Ignore these 3 for now.)
-        // The following items are not yet part of the game. (WIP - Ignore for now.)
-        "BlackDivision": false,
-        "Cultist": false,
-        "EoDOwners": false
+        "Unheard": false,
+        "Arena": false,
+        // The following item(s) is(are) not yet part of the game. (WIP - Ignore for now.)
+        "BlackDivision": false
     },
     "GodMode": {
         // Disable damage dealt by blunt force trauma.
-        "BluntForce": false,
+        "BluntForce": true,
 
         // (WIP) Disable damage from projectile penetration of armor.
         // This value is a work in progress and is not currently implemented in this mod. - Please ignore for now.
         "Penetration": false
     },
     "Blacklist": {
-        // Set to 'true' to disable item spawning on PMC bots. (Scavs by default do not spawn with this item?)
-        "Enabled": false
+        // Set to 'true' to disable item spawning on PMC or Scav bots, or to remove from global loot pools.
+        "pmc": false,
+        "scav": false,
+        "globalLoot": false
     }
 }
 ```
