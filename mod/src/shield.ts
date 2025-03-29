@@ -1,3 +1,4 @@
+/* eslint-disable no-var */
 /**
  * Copyright: jbs4bmx
 */
@@ -5,8 +6,11 @@
 import { ConfigServer } from "@spt/servers/ConfigServer";
 import { ConfigTypes } from "@spt/models/enums/ConfigTypes";
 import { DatabaseServer } from "@spt/servers/DatabaseServer";
-import { DependencyContainer } from "tsyringe";
+import { container, DependencyContainer } from "tsyringe";
+import { FileSystemSync } from "@spt/utils/FileSystemSync";
 import { IBotConfig } from "@spt/models/spt/config/IBotConfig";
+import { ICoreConfig } from "@spt/models/spt/config/ICoreConfig";
+import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
 import { IItemConfig } from "@spt/models/spt/config/IItemConfig";
 import { ILogger } from "@spt/models/spt/utils/ILogger";
 import { ImporterUtil } from "@spt/utils/ImporterUtil";
@@ -14,73 +18,82 @@ import { IPmcConfig } from "@spt/models/spt/config/IPmcConfig";
 import { IPostDBLoadMod } from "@spt/models/external/IPostDBLoadMod";
 import { IPreSptLoadMod } from "@spt/models/external/IPreSptLoadMod";
 import { PreSptModLoader } from "@spt/loaders/PreSptModLoader";
-import { VFS } from "@spt/utils/VFS";
+import { satisfies } from "semver";
 import { jsonc } from "jsonc";
-import path from "path";
+import path from "node:path";
 
-let hsdb;
-let itemConfig: IItemConfig;
-let botConfig: IBotConfig;
-let pmcConfig: IPmcConfig;
-let configServer: ConfigServer;
+//let hsdb: any;
+const preSptModLoader = container.resolve<PreSptModLoader>("PreSptModLoader");
+const databaseImporter = container.resolve<ImporterUtil>("ImporterUtil");
+const logger = container.resolve<ILogger>("WinstonLogger");
+const configServer = container.resolve<ConfigServer>("ConfigServer");
+//const botConfig = configServer.getConfig<IBotConfig>(ConfigTypes.BOT);
+const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
+const itemConfig = configServer.getConfig<IItemConfig>(ConfigTypes.ITEM);
+const sptConfig = configServer.getConfig<ICoreConfig>(ConfigTypes.CORE);
+const fileSystem = container.resolve<FileSystemSync>("FileSystemSync");
 
 class Holtzman implements IPreSptLoadMod, IPostDBLoadMod
 {
-    private pkg;
+    //private pkg;
+    private hsdb = require("../database/dbItems.json");
+    private hsta = require("../database/ragmanAssort.json");
     private privatePath = require('path');
-    private modName = this.privatePath.basename(this.privatePath.dirname(__dirname.split('/').pop()));
+    public modName: string = this.privatePath.basename(this.privatePath.dirname(__dirname.split('/').pop()));
+
+    public preSptLoad(container: DependencyContainer): void
+    {
+        if (!this.validSptVersion(container)) {
+            logger.error("This version of HoltzmanShield was not made for your version of SPT. Disabling");
+            return;
+        }
+    }
 
     public postDBLoad(container: DependencyContainer)
     {
-        const logger = container.resolve<ILogger>("WinstonLogger");
         const db = container.resolve<DatabaseServer>("DatabaseServer").getTables();
-        const preSptModLoader = container.resolve<PreSptModLoader>("PreSptModLoader");
-        const databaseImporter = container.resolve<ImporterUtil>("ImporterUtil");
         const locales = db.locales.global;
         const handbook = db.templates.handbook.Items;
-        this.pkg = require("../package.json");
-        hsdb = databaseImporter.loadRecursive(`${preSptModLoader.getModPath(this.modName)}database/`);
+        //hsdb = databaseImporter.loadRecursive(`${preSptModLoader.getModPath(this.modName)}database/`);
 
-        for (const iItem in hsdb.dbItems.templates) {
-            db.templates.items[iItem] = hsdb.dbItems.templates[iItem];
+        for (const iItem in this.hsdb.templates) {
+            db.templates.items[iItem] = this.hsdb.templates[iItem];
         }
 
-        for (const hItem of hsdb.dbItems.handbook.Items) {
+        for (const hItem of this.hsdb.handbook.Items) {
             if (!handbook.find(i=>i.Id == hItem.Id)) {
                 handbook.push(hItem);
             }
         }
 
         for (const localeID in locales) {
-            for (const locale in hsdb.dbItems.locales.en) {
-                locales[localeID][locale] = hsdb.dbItems.locales.en[locale];
+            for (const locale in this.hsdb.locales.en) {
+                locales[localeID][locale] = this.hsdb.locales.en[locale];
             }
         }
 
-        for (const pItem in hsdb.dbItems.prices) {
-            db.templates.prices[pItem] = hsdb.dbItems.prices[pItem];
+        for (const pItem in this.hsdb.prices) {
+            db.templates.prices[pItem] = this.hsdb.prices[pItem];
         }
 
         for (const tradeName in db.traders) {
             // Ragman
             if ( tradeName === "5ac3b934156ae10c4430e83c" ) {
-                for (const riItem of hsdb.ragmanAssort.items) {
+                for (const riItem of this.hsta.items) {
                     if (!db.traders[tradeName].assort.items.find(i=>i._id == riItem._id)) {
                         db.traders[tradeName].assort.items.push(riItem);
                     }
                 }
-                for (const rbItem in hsdb.ragmanAssort.barter_scheme) {
-                    db.traders[tradeName].assort.barter_scheme[rbItem] = hsdb.ragmanAssort.barter_scheme[rbItem];
+                for (const rbItem in this.hsta.barter_scheme) {
+                    db.traders[tradeName].assort.barter_scheme[rbItem] = this.hsta.barter_scheme[rbItem];
                 }
-                for (const rlItem in hsdb.ragmanAssort.loyal_level_items) {
-                    db.traders[tradeName].assort.loyal_level_items[rlItem] = hsdb.ragmanAssort.loyal_level_items[rlItem];
+                for (const rlItem in this.hsta.loyal_level_items) {
+                    db.traders[tradeName].assort.loyal_level_items[rlItem] = this.hsta.loyal_level_items[rlItem];
                 }
             }
         }
 
         this.setConfigOptions(container)
-
-        logger.info(`${this.pkg.author}-${this.pkg.name} v${this.pkg.version}: Cached Successfully`);
     }
 
     public setConfigOptions(container: DependencyContainer): void
@@ -95,8 +108,8 @@ class Holtzman implements IPreSptLoadMod, IPostDBLoadMod
         //const botConfig = configServer.getConfig<IBotConfig>(ConfigTypes.BOT);
         const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
         const itemConfig = configServer.getConfig<IItemConfig>(ConfigTypes.ITEM);
-        const vfs = container.resolve<VFS>("VFS");
-        const { ArmorCoverage, ArmorAmount, Resources, PreFab, GodMode, Blacklist } = jsonc.parse(vfs.readFile(path.resolve(__dirname, "../config.jsonc")));
+        const fs = container.resolve<FileSystemSync>("FileSystemSync");
+        const { ArmorCoverage, ArmorAmount, Resources, PreFab, GodMode, Blacklist } = jsonc.parse(fs.read(path.resolve(__dirname, "../config.jsonc")));;
 
         //Add item to filter so it can be worn
         db.templates.items["55d7217a4bdc2d86028b456d"]._props.Slots[14]._props.filters[0].Filter.push("66087622e26587d9430a1cfb");
@@ -386,6 +399,13 @@ class Holtzman implements IPreSptLoadMod, IPostDBLoadMod
         }
     }
 
+    private validSptVersion(container: DependencyContainer): boolean
+    {
+        const sptVersion = globalThis.G_SPTVERSION || sptConfig.sptVersion;
+        const packageJsonPath: string = path.join(__dirname, "../package.json");
+        const modSptVersion = JSON.parse(fileSystem.read(packageJsonPath)).sptVersion;
+        return satisfies(sptVersion, modSptVersion);
+    }
 }
 
 module.exports = { mod: new Holtzman() }
