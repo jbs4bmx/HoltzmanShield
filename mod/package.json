@@ -1,7 +1,7 @@
 {
     "name": "HoltzmanShield",
-    "version": "311.1.1",
-    "sptVersion": "3.11.1",
+    "version": "311.2.1",
+    "sptVersion": "3.11.2",
     "loadBefore": [],
     "loadAfter": [],
     "incompatibilities": [],
