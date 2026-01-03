@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "HoltzmanShield": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:57296;http://localhost:57297"
+    }
+  }
+}

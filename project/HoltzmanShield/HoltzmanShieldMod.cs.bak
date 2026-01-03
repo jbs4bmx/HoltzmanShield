@@ -1,0 +1,610 @@
+﻿using SPTarkov.DI.Annotations;
+using SPTarkov.Server.Core.Constants;
+using SPTarkov.Server.Core.DI;
+using SPTarkov.Server.Core.Helpers;
+using SPTarkov.Server.Core.Models.Common;
+using SPTarkov.Server.Core.Models.Eft.Common.Tables;
+using SPTarkov.Server.Core.Models.Enums;
+using SPTarkov.Server.Core.Models.Spt.Config;
+using SPTarkov.Server.Core.Models.Spt.Mod;
+using SPTarkov.Server.Core.Models.Utils;
+using SPTarkov.Server.Core.Servers;
+using SPTarkov.Server.Core.Services;
+using SPTarkov.Server.Core.Services.Mod;
+using System.Reflection;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Path = System.IO.Path;
+
+namespace jbs4bmx.HoltzmanShield;
+
+public record ModMetadata : AbstractModMetadata
+{
+    public override string ModGuid { get; init; } = "com.jbs4bmx.holtzmanshield";
+    public override string Name { get; init; } = "HoltzmanShield";
+    public override string Author { get; init; } = "jbs4bmx";
+    public override List<string>? Contributors { get; init; }
+    public override SemanticVersioning.Version Version { get; init; } = new("4.0.0");
+    public override SemanticVersioning.Range SptVersion { get; init; } = new("~4.0.0");
+    public override List<string>? Incompatibilities { get; init; }
+    public override Dictionary<string, SemanticVersioning.Range>? ModDependencies { get; init; }
+    public override string? Url { get; init; }
+    public override bool? IsBundleMod { get; init; }
+    public override string? License { get; init; } = "MIT";
+}
+
+[Injectable(TypePriority = OnLoadOrder.PostDBModLoader + 1)]
+public class ShieldItemService(
+    ISptLogger<ShieldItemService> logger,
+    CustomItemService customItemService,
+    DatabaseService databaseService,
+    ConfigServer configServer,
+    ModHelper modHelper) : IOnLoad
+{
+    public Task OnLoad()
+    {
+        var pathToMod = modHelper.GetAbsolutePathToModFolder(Assembly.GetExecutingAssembly());
+        var shieldConfig = modHelper.GetJsonDataFromFile<ModConfig>(pathToMod, "config.jsonc");
+        var placeableSlot = databaseService.GetTables().Templates.Items[ItemTpl.INVENTORY_DEFAULT].Properties!.Slots!.ToList()[14];
+        var notPlaceableSlot = databaseService.GetTables().Templates.Items[ItemTpl.INVENTORY_DEFAULT].Properties!.Slots!.ToList()[7];
+        var itemConfig = configServer.GetConfig<ItemConfig>();
+        var botConfig = configServer.GetConfig<BotConfig>();
+        var pmcConfig = configServer.GetConfig<PmcConfig>();
+        var containerTemplate = databaseService.GetTables().Templates.Items[BaseClasses.LOOT_CONTAINER];
+
+        List<string> colliders = [];
+
+        /*
+        List<string> headColliders = [];
+        List<string> neckColliders = [];
+        List<string> leftArmColliders = [];
+        List<string> rightArmColliders = [];
+        List<string> frontColliders = [];
+        List<string> backColliders = [];
+        List<string> leftSideColliders = [];
+        List<string> rightSideColliders = [];
+        List<string> pelvisColliders = [];
+        List<string> buttocksColliders = [];
+        List<string> leftLegColliders = [];
+        List<string> rightLegColliders = [];
+        */
+
+        int prefabCount = 0;
+        string prefabValue = "";
+        double bluntValue = 0.5;
+        double indestructibleValue = 0.1;
+        string? trueKey = null;
+
+        // Validate configuration values and set defaults if out of range.
+        if (shieldConfig.RepairCost is int repairCost)
+        {
+            if (repairCost < 1 || repairCost > 2000)
+            {
+                shieldConfig.RepairCost = 500;
+            }
+        }
+        if (shieldConfig.Durability is int durability)
+        {
+            if (durability < 1 || durability > 9999999)
+            {
+                shieldConfig.Durability = 2000;
+            }
+        }
+        if (shieldConfig.TraderPrice is int traderPrice)
+        {
+            if (traderPrice < 1 || traderPrice > 9999999)
+            {
+                shieldConfig.TraderPrice = 69420;
+            }
+        }
+        // Set armor collider values based on config.
+        /*
+        if (shieldConfig.Head is bool head && head)
+        {
+            headColliders.AddRange(["ParietalHead", "BackHead", "HeadCommon"]);
+        }
+        if (shieldConfig.Eyes is bool eyes && eyes)
+        {
+            headColliders.Add("Eyes");
+        }
+        if (shieldConfig.Ears is bool ears && ears)
+        {
+            headColliders.Add("Ears");
+        }
+        if (shieldConfig.Jaw is bool jaw && jaw)
+        {
+            headColliders.Add("Jaw");
+        }
+        if (shieldConfig.Neck is bool neck && neck)
+        {
+            neckColliders.AddRange(["NeckFront", "NeckBack"]);
+        }
+        if (shieldConfig.Arms is bool arms && arms)
+        {
+            leftArmColliders.AddRange(["LeftUpperArm", "LeftForearm"]);
+            rightArmColliders.AddRange(["RightUpperArm", "RightForearm"]);
+        }
+        if (shieldConfig.Front is bool front && front)
+        {
+            frontColliders.AddRange(["RibcageUp", "RibcageLow"]);
+        }
+        if (shieldConfig.Back is bool back && back)
+        {
+            backColliders.AddRange(["SpineTop", "SpineDown"]);
+        }
+        if (shieldConfig.Sides is bool sides && sides)
+        {
+            leftSideColliders.AddRange(["LeftSideChestUp", "LeftSideChestDown"]);
+            rightSideColliders.AddRange(["RightSideChestUp", "RightSideChestDown"]);
+        }
+        if (shieldConfig.Pelvis is bool pelvis && pelvis)
+        {
+            pelvisColliders.Add("Pelvis");
+        }
+        if (shieldConfig.Buttocks is bool buttocks && buttocks)
+        {
+            buttocksColliders.Add("PelvisBack");
+        }
+        if (shieldConfig.Legs is bool legs && legs)
+        {
+            leftLegColliders.AddRange(["LeftThigh", "LeftCalf"]);
+            rightLegColliders.AddRange(["RightThigh", "RightCalf"]);
+        }
+        */
+        if (shieldConfig.Head is bool head && head)
+        {
+            colliders.AddRange(["ParietalHead", "BackHead", "HeadCommon"]);
+        }
+        if (shieldConfig.Eyes is bool eyes && eyes)
+        {
+            colliders.Add("Eyes");
+        }
+        if (shieldConfig.Ears is bool ears && ears)
+        {
+            colliders.Add("Ears");
+        }
+        if (shieldConfig.Jaw is bool jaw && jaw)
+        {
+            colliders.Add("Jaw");
+        }
+        if (shieldConfig.Neck is bool neck && neck)
+        {
+            colliders.AddRange(["NeckFront", "NeckBack"]);
+        }
+        if (shieldConfig.Arms is bool arms && arms)
+        {
+            colliders.AddRange(["LeftUpperArm", "LeftForearm", "RightUpperArm", "RightForearm"]);
+        }
+        if (shieldConfig.Front is bool front && front)
+        {
+            colliders.AddRange(["RibcageUp", "RibcageLow"]);
+        }
+        if (shieldConfig.Back is bool back && back)
+        {
+            colliders.AddRange(["SpineTop", "SpineDown"]);
+        }
+        if (shieldConfig.Sides is bool sides && sides)
+        {
+            colliders.AddRange(["LeftSideChestUp", "LeftSideChestDown", "RightSideChestUp", "RightSideChestDown"]);
+        }
+        if (shieldConfig.Pelvis is bool pelvis && pelvis)
+        {
+            colliders.Add("Pelvis");
+        }
+        if (shieldConfig.Buttocks is bool buttocks && buttocks)
+        {
+            colliders.Add("PelvisBack");
+        }
+        if (shieldConfig.Legs is bool legs && legs)
+        {
+            colliders.AddRange(["LeftThigh", "LeftCalf", "RightThigh", "RightCalf"]);
+        }
+
+        // Get PreFab value from config.
+        if (shieldConfig.PreFab != null)
+        {
+            var preFabProperties = typeof(ModPreFab).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (var prop in preFabProperties)
+            {
+                if (prop.PropertyType == typeof(bool) && (bool)(prop.GetValue(shieldConfig.PreFab) ?? false))
+                {
+                    prefabCount++;
+                    trueKey = prop.Name;
+                }
+            }
+        }
+        if (prefabCount == 0)
+        {
+            logger.Warning("[HS] No property for PreFab is set to 'true'. Defaulting to Evasion Armband.");
+            prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_evasion.bundle";
+        }
+        else if (prefabCount > 1)
+        {
+            logger.Warning("[HS] More than one property value for PreFab is set to 'true'. Defaulting to Evasion Armband.");
+            prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_evasion.bundle";
+        }
+        else
+        {
+            switch (trueKey)
+            {
+                case "Evasion":
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_evasion.bundle";
+                    break;
+                case "Alpha":
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_alpha.bundle";
+                    break;
+                case "DeadSkul":
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_dead.bundle";
+                    break;
+                case "TrainHard":
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_helmet.bundle";
+                    break;
+                case "TwitchRivals":
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_revals.bundle";
+                    break;
+                case "Bear":
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_bear.bundle";
+                    break;
+                case "Kiba":
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_kibaarms.bundle";
+                    break;
+                case "Labs":
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_labs.bundle";
+                    break;
+                case "RFArmy":
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_russia.bundle";
+                    break;
+                case "TerraGroup":
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_terragroup.bundle";
+                    break;
+                case "Untar":
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_un.bundle";
+                    break;
+                case "USEC":
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_usec.bundle";
+                    break;
+                case "Blue":
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_blue.bundle";
+                    break;
+                case "Green":
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_green.bundle";
+                    break;
+                case "Red":
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_red.bundle";
+                    break;
+                case "White":
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_white.bundle";
+                    break;
+                case "Yellow":
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_yellow.bundle";
+                    break;
+                case "Unheard":
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_unheard.bundle";
+                    break;
+                case "Arena":
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_arena.bundle";
+                    break;
+                case "XMas":
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_xmass.bundle";
+                    break;
+                case "Prestige1":
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_prestige_1.bundle";
+                    break;
+                case "Prestige2":
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_prestige_2.bundle";
+                    break;
+                case "Prestige3":
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_prestige_3.bundle";
+                    break;
+                case "Prestige4":
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_prestige_4.bundle";
+                    break;
+                case "Prestige5":
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_prestige_5.bundle";
+                    break;
+                case "BlackDivision":
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_evasion.bundle";
+                    break;
+                case "EODOwners":
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_evasion.bundle";
+                    break;
+                case "Discord":
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_evasion.bundle";
+                    break;
+                default:
+                    prefabValue = "assets/content/items/equipment/armband/item_equipment_armband_evasion.bundle";
+                    break;
+            }
+        }
+        // Advanced Options
+        if (shieldConfig.BluntForce is bool blunt && blunt)
+        {
+            bluntValue = 0;
+            indestructibleValue = 1;
+        }
+
+        // Initialize item properties from configuration file.
+        // Clone 65702f87722744627e05cdb8 = "module3m_level2_soft_armor_front"
+        // Clone 64afc71497cf3a403c01ff38 = "item_equipment_plate_granitBr5_6 class_frontback"
+        var HSTech = new NewItemFromCloneDetails
+        {
+            ItemTplToClone = new MongoId("65702f87722744627e05cdb8"),
+            ParentId = BaseClasses.ARMOR_PLATE,
+            NewId = new MongoId("6906360e1254e387fba9dc06"),
+            FleaPriceRoubles = shieldConfig.FleaPrice,
+            HandbookPriceRoubles = shieldConfig.TraderPrice,
+            HandbookParentId = new MongoId("5b5f701386f774093f2ecf0f"),
+            Locales = new Dictionary<string, LocaleDetails>
+            {
+                {
+                    "en", new LocaleDetails
+                    {
+                        Name = "HSTech",
+                        ShortName = "HST",
+                        Description = "The underlying technology in Holtzman Shield."
+                    }
+                }
+            },
+            OverrideProperties = new TemplateItemProperties
+            {
+                Name = "HSTech",
+                ShortName = "HST",
+                Description = "The underlying technology in Holtzman Shield.",
+                ArmorClass = 10,
+                ArmorMaterial = ArmorMaterial.UHMWPE,
+                ArmorType = "Heavy",
+                BackgroundColor = "red",
+                Durability = shieldConfig.Durability,
+                Height = 1,
+                Indestructibility = indestructibleValue,
+                MaterialType = "BodyArmor",
+                MaxDurability = shieldConfig.Durability,
+                MergesWithChildren = true,
+                Prefab = new Prefab
+                {
+                    Path = "assets/content/items/barter/item_barter_electr_militaryboard/item_barter_electr_militaryboard.bundle"
+                },
+                RarityPvE = "Not_exist",
+                RepairCost = shieldConfig.RepairCost,
+                RepairSpeed = 2,
+                RicochetParams = new SPTarkov.Server.Core.Models.Eft.Common.XYZ
+                {
+                    X = 0,
+                    Y = 0,
+                    Z = 80
+                },
+                Weight = 0,
+                Width = 1,
+                ArmorColliders = colliders,
+                MousePenalty = 0,
+                SpeedPenaltyPercent = 0,
+                WeaponErgonomicPenalty = 0
+            }
+        };
+
+        // Clone 59e7635f86f7742cbf2c1095 = "module_3m"
+        // Clone 5ca21c6986f77479963115a7 = "item_equipment_armor_redut_t"
+        var HSItem = new NewItemFromCloneDetails
+        {
+            ItemTplToClone = ItemTpl.ARMOR_BNTI_MODULE3M_BODY,
+            ParentId = BaseClasses.ARMORED_EQUIPMENT,
+            NewId = new MongoId("6906360e9ceb175a23068fd4"),
+            FleaPriceRoubles = shieldConfig.FleaPrice,
+            HandbookPriceRoubles = shieldConfig.TraderPrice,
+            HandbookParentId = new MongoId("5b5f701386f774093f2ecf0f"),
+            Locales = new Dictionary<string, LocaleDetails>
+            {
+                {
+                    "en", new LocaleDetails
+                    {
+                        Name = "Holtzman Shield",
+                        ShortName = "Shield",
+                        Description = "Shield technology engineered by House Atreides that protects against kenetic projectiles."
+                    }
+                }
+            },
+            OverrideProperties = new TemplateItemProperties
+            {
+                Name = "Holtzman Shield",
+                ShortName = "Shield",
+                ArmorMaterial = ArmorMaterial.UHMWPE,
+                ArmorType = "Heavy",
+                BackgroundColor = "red",
+                BlindnessProtection = shieldConfig.BlindnessProtection,
+                BluntThroughput = bluntValue,
+                Description = "Shield technology engineered by House Atreides that protects against kenetic projectiles.",
+                Durability = 0,
+                Height = 1,
+                Indestructibility = indestructibleValue,
+                MaxDurability = 0,
+                MergesWithChildren = true,
+                Prefab = new Prefab
+                {
+                    Path = prefabValue
+                },
+                RepairCost = shieldConfig.RepairCost,
+                RepairSpeed = 2,
+                RicochetParams = new SPTarkov.Server.Core.Models.Eft.Common.XYZ
+                {
+                    X = 0,
+                    Y = 0,
+                    Z = 80
+                },
+                Slots = new List<Slot>
+                {
+                    new Slot
+                    {
+                        Id = new MongoId("66087622e26587d9430a1cfd"),
+                        MergeSlotWithChildren = true,
+                        Name = "Soft_armor_front",
+                        Parent = new MongoId("6906360e9ceb175a23068fd4"),
+                        Properties = new SlotProperties
+                        {
+                            Filters = new List<SlotFilter>
+                            {
+                                new SlotFilter
+                                {
+                                    Filter = [new MongoId("6906360e1254e387fba9dc06")],
+                                    Plate = new MongoId("6906360e1254e387fba9dc06"),
+                                    ArmorColliders = colliders,
+                                    ArmorPlateColliders = [],
+                                    BluntDamageReduceFromSoftArmor = true,
+                                    Locked = false
+                                }
+                            }
+                        },
+                        Prototype = new MongoId("64479fdf9731c8fadc0642c1"),
+                        Required = true
+                    }
+                },
+                //UnlootableFromSlot = "ArmBand",
+                UnlootableFromSlot = "FirstPrimaryWeapon",
+                Weight = 0.01,
+                Width = 1,
+                ArmorClass = 10,
+                MousePenalty = 0,
+                SpeedPenaltyPercent = 0,
+                WeaponErgonomicPenalty = 0
+            }
+        };
+
+        // Create the new items
+        customItemService.CreateItemFromClone(HSTech);
+        customItemService.CreateItemFromClone(HSItem);
+
+        // Add to Armband slot
+        placeableSlot.Properties!.Filters!.First().Filter!.Add(new MongoId("6906360e9ceb175a23068fd4"));
+        /*
+         TODO: ADD BLOCK FOR ARMOR SLOT
+         */
+
+        // Configure blacklists
+        if (shieldConfig.PMC is bool pmc && pmc)
+        {
+            pmcConfig.VestLoot.Blacklist.Add(new MongoId("6906360e9ceb175a23068fd4"));
+            pmcConfig.PocketLoot.Blacklist.Add(new MongoId("6906360e9ceb175a23068fd4"));
+            pmcConfig.BackpackLoot.Blacklist.Add(new MongoId("6906360e9ceb175a23068fd4"));
+            pmcConfig.GlobalLootBlacklist.Add(new MongoId("6906360e9ceb175a23068fd4"));
+        }
+        if (shieldConfig.GlobalLoot is bool globalLoot && globalLoot)
+        {
+            botConfig.ItemSpawnLimits.Values.ToList().ForEach(limitDict =>
+            {
+                if (!limitDict.ContainsKey(new MongoId("6906360e9ceb175a23068fd4")))
+                {
+                    limitDict.Add(new MongoId("6906360e9ceb175a23068fd4"), 0);
+                }
+            });
+            if (containerTemplate != null)
+            {
+                var gridFilters = containerTemplate.Properties?.Grids?.ToList();
+                gridFilters?.ForEach(grid =>
+                {
+                    var filterList = grid.Properties?.Filters?.ToList();
+                    filterList![0].ExcludedFilter?.Add(new MongoId("6906360e9ceb175a23068fd4"));
+                    grid!.Properties!.Filters = filterList;
+                });
+            }
+        }
+
+        // Call function to add the item to the specified trader.
+        AddToTraderAssort(new MongoId("5ac3b934156ae10c4430e83c"), new MongoId("6906360e9ceb175a23068fd4"), shieldConfig.TraderPrice, new MongoId(), shieldConfig.TraderLoyaltyLevel);
+        AddToTraderAssort(new MongoId("5ac3b934156ae10c4430e83c"), new MongoId("6906360e1254e387fba9dc06"), shieldConfig.TraderPrice, new MongoId(), shieldConfig.TraderLoyaltyLevel);
+
+        // End.
+        return Task.CompletedTask;
+    }
+
+    private void AddToTraderAssort(MongoId traderId, MongoId itemId, double price, MongoId assortId, int level)
+    {
+        // This function adds the specified item to the trader's assortment with the property values passed to it.
+        var assort = databaseService.GetTrader(traderId)?.Assort;
+        
+        // Generate a new assort record.
+        var assortEntry = new Item
+        {
+            Id = assortId,
+            Template = itemId,
+            ParentId = "hideout",
+            SlotId = "hideout",
+            Upd = new Upd
+            {
+                UnlimitedCount = false,
+                StackObjectsCount = 1,
+                BuyRestrictionMax = 50,
+                BuyRestrictionCurrent = 0
+            }
+        };
+
+        // Generate a barter scheme for the item.
+        var barterScheme = new BarterScheme
+        {
+            Count = price,
+            Template = ItemTpl.MONEY_ROUBLES
+        };
+
+        // Add the new item to the trader's assortment and set the loyaltylevel.
+        assort!.Items.Add(assortEntry);
+        assort!.BarterScheme[assortId] = [[barterScheme]];
+        assort!.LoyalLevelItems[assortId] = level;
+    }
+}
+
+public class ModConfig
+{
+    public bool Head { get; set; }
+    public bool Neck { get; set; }
+    public bool Eyes { get; set; }
+    public bool Ears { get; set; }
+    public bool Jaw { get; set; }
+    public bool Arms { get; set; }
+    public bool Front { get; set; }
+    public bool Back { get; set; }
+    public bool Sides { get; set; }
+    public bool Pelvis { get; set; }
+    public bool Buttocks { get; set; }
+    public bool Legs { get; set; }
+    public int Durability { get; set; }
+    public double BlindnessProtection { get; set; }
+    public int RepairCost { get; set; }
+    public int TraderPrice { get; set; }
+    public int FleaPrice { get; set; }
+    public int TraderLoyaltyLevel { get; set; }
+    public ModPreFab? PreFab { get; set; }
+    public bool BluntForce { get; set; }
+    public bool Penetration { get; set; }
+    public bool PMC { get; set; }
+    public bool GlobalLoot { get; set; }
+}
+
+public class ModPreFab
+{
+    public bool Evasion { get; set; }
+    public bool Alpha { get; set; }
+    public bool DeadSkul { get; set; }
+    public bool TrainHard { get; set; }
+    public bool TwitchRivals { get; set; }
+    public bool Bear { get; set; }
+    public bool Kiba { get; set; }
+    public bool Labs { get; set; }
+    public bool RFArmy { get; set; }
+    public bool TerraGroup { get; set; }
+    public bool Untar { get; set; }
+    public bool USEC { get; set; }
+    public bool Blue { get; set; }
+    public bool Green { get; set; }
+    public bool Red { get; set; }
+    public bool White { get; set; }
+    public bool Yellow { get; set; }
+    public bool Unheard { get; set; }
+    public bool Arena { get; set; }
+    public bool XMas { get; set; }
+    public bool Prestige1 { get; set; }
+    public bool Prestige2 { get; set; }
+    public bool Prestige3 { get; set; }
+    public bool Prestige4 { get; set; }
+    public bool Prestige5 { get; set; }
+    public bool BlackDivision { get; set; }
+    public bool EODOwners { get; set; }
+    public bool Discord { get; set; }
+}

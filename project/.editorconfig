@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS8764: Nullability of return type doesn't match overridden member (possibly because of nullability attributes).
+dotnet_diagnostic.CS8764.severity = none

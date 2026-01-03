@@ -1,11 +1,11 @@
 <a id="readme-top"></a>
+
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 
-<!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://github.com/jbs4bmx/HoltzmanShield">
@@ -14,56 +14,45 @@
 
   <h3 align="center">Holtzman Shield</h3>
 
-  <p align="center">More armor based loosely on the technology from Frank Herbert's Dune!<br /></p>
+  <p align="center">
+    A configurable armband-based shield system inspired by Frank Herbert’s <em>Dune</em>.<br />
+    Customize armor coverage, durability, prefab skins, and more.
+  </p>
 
   [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/X8X611JH15)
 </div>
 
+---
 
+## About the Project
+**Type:** Server Mod
+**Requires:** [ArmbandCore](https://github.com/jbs4bmx/ArmbandCore/releases)
+**Disclaimer:** Provided *as-is* with no guarantee of support.
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#configuration">Configuration</a>
-      <ul>
-        <li><a href="#mod-faq">Mod FAQ</a></li>
-      </ul>
-    </li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
+Holtzman Shield adds a new armband variant that provides configurable armor protection across multiple body regions. Inspired by the personal shields of *Dune*, this mod allows you to fine‑tune which body parts are protected, how durable the shield is, and which visual prefab it uses.
 
+All behavior is controlled through a simple, `config.jsonc` file designed to be easy for anyone to edit.
 
+---
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
-Type: Server Mod</br>
-Disclaimer: **This mod is provided _as-is_ with _no guarantee_ of support.**
+## Features
+- **Configurable armor coverage** for head, torso, limbs, and more
+- **Multiple prefab skins** selectable via config
+- **Adjustable durability, repair cost, and trader pricing**
+- **Optional blunt‑force mitigation** (requires client-side support)
+- **Optional blacklist integration** for PMC bots and global loot
+- **Lightweight, optimized, and SPT 4.0.0+ compatible**
+- **Requires ArmbandCore** for slot integration
 
-This mod adds a new variant of armband based loosely on the shield technology from the Novel/Movies "Dune". It adds armor protection for body parts as defined in the configuration file. You may alter the level of protection by editing the values found in the 'config.json' file.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-Values of **armorCollider** array assigned by Armor mod options.
+---
 
-| Mod Option | Configurable Value | Assigned Value |
-|:----- | :----- | :----- |
+## Armor Coverage Mapping
+The following table shows how each config option maps to in‑game armor colliders:
+
+| Mod Option | Config Value | Assigned Colliders |
+|-----------|--------------|--------------------|
 | Head | true/false | ParietalHead, BackHead, HeadCommon |
 | Neck | true/false | NeckFront, NeckBack |
 | Eyes | true/false | Eyes |
@@ -79,196 +68,197 @@ Values of **armorCollider** array assigned by Armor mod options.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+---
 
-
-### Built With
-| Frameworks/Libraries                                      | Name         | Link                                       |
-| :-------------------------------------------------------: | :----------: | :----------------------------------------: |
-| <img src="./images/icons/TypeScript.svg" width="48">      | `TypeScript` | [TypeScript Website][TypeScript-url]       |
-
-|                         IDEs                                |      Name       | Link                                      |
-| :---------------------------------------------------------: | :-------------: | :---------------------------------------: |
-| <img src="./images/icons/VSCode-Dark.svg" width="48">       | `VSCode`        | [VSCode Website][Vscode-url]              |
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- GETTING STARTED -->
 ## Getting Started
-This section will explain how to install and use this mod.
 
 ### Prerequisites
-**This mod requires the [ArmBandCore](https://github.com/jbs4bmx/ArmbandCore/releases) mod to function properly.**</br>
-EFT and SPT are required to use this mod.
+- SPT 4.0.0+
+- EFT 40087 installed
+- **ArmbandCore** (required/packaged with this mod)
 
 ### Installation
-_For the purpose of these directions, "[SPT]" represents your SPT folder path._
-
-Start by downloading the mod from the [Releases](https://github.com/jbs4bmx/HoltzmanShield/releases) page.
-
-Follow these steps to install and configure the mod:
-  1. Extract the contents of the zip file into the root of your [SPT] folder.
-     - That's the same location as "SPT.Server.exe" and "SPT.Launcher.exe".
-  2. Edit the Config to adjust the values to your liking.
-  3. Start SPT.Server.exe and wait until it fully loads.
-  4. Start SPT.Launcher.exe.
-  5. Now you can launch the game and profit.
+1. Download the latest release from the [Releases](https://github.com/jbs4bmx/HoltzmanShield/releases) page.
+2. Extract the contents into your **SPT root folder** (same location as `EscapeFromTarkov.exe`).
+3. Edit `config.jsonc` to customize coverage, prefab, and item properties.
+4. Start `SPT.Server.exe` and wait for it to fully load.
+5. Launch the game through `SPT.Launcher.exe`.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+---
 
-
-<!-- CONFIGURATION EXAMPLES -->
 ## Configuration
-Edit '.\config.jsonc' file as desired. Specify which areas to protect, the amount of protection, and which item you want HS to look like. You can even customize trader pricing and loyalty level requirements to make it easier or harder on yourself to acquire this item.<br>
+All settings are controlled through `config.jsonc`. You can adjust:
+  - Which body parts are protected
+  - Durability and repair cost
+  - Blindness protection
+  - Trader price and loyalty level
+  - Prefab skin (only one may be true)
+  - Optional blunt‑force mitigation
+  - Optional blacklist behavior
+
+The values that you see in the example below are the default values of the mod.<br>
 ```jsonc
 {
-    "ArmorCoverage": {
-        // Customize Holtzman Shield armor protection areas.
-        // This value must be true or false.
-        "Head": true,
-        "Neck": true,
-        "Eyes": true,
-        "Ears": true,
-        "Jaw": true,
-        "Arms": true,
-        "Front": true,
-        "Back": true,
-        "Sides": true,
-        "Pelvis": true,
-        "Buttocks": true,
-        "Legs": true
-    },
-    "ArmorAmount": {
-        // Customize Holtzman Shield armor durability level.
-        // This must be a whole number ranging from 1-9999999.
-        "Durability": 100000
-    },
-    "Resources": {
-        // Customize Holtzman Shield item properties.
-        "ArmorClass": "10",
-        "ArmorMaterial": "Ceramic",
-        "ArmorType": "Heavy",
-        "ItemWeight": 0.01,
+  // Holtzman Shield Configuration File
 
-        // This is the amount of protection from bright lights.
-        // This must be any number value between 0 and 1 (e.g., 0, 0.25, 0.5, 0.8, 1, etc.)
-        "BlindnessProtection": 1,
+  // __Armor Coverage Settings_________________________________________________________________________________________
+  // The following values must be set to either true or false. You may set more than one of these to true.
+  // Default Value (Enabled): true (for all coverage areas)
+  // ------------------------------------------------------------------------------------------------------------------
+  "Head": true,
+  "Neck": true,
+  "Eyes": true,
+  "Ears": true,
+  "Jaw": true,
+  "Arms": true,
+  "Front": true,
+  "Back": true,
+  "Sides": true,
+  "Pelvis": true,
+  "Buttocks": true,
+  "Legs": true,
 
-        // I recommend keeping this at or below 100
-        // This must be a whole number ranging from 1-2000.
-        "RepairCost": 100,
 
-        // Customize trader (Ragman) properties
-        "traderPrice": 1000,
-        "traderLoyaltyLevel": 1
-    },
-    "PreFab": {
-        // If more than one is set to 'true', then PreFab will revert to default (Evasion).
-        "Evasion": true,
-        "Alpha": false,
-        "DeadSkul": false,
-        "TrainHard": false,
-        "TwitchRivals": false,
-        "Bear": false,
-        "Kiba": false,
-        "Labs": false,
-        "RFArmy": false,
-        "TerraGroup": false,
-        "Untar": false,
-        "USEC": false,
-        "Blue": false,
-        "Green": false,
-        "Red": false,
-        "White": false,
-        "Yellow": false,
-        "Unheard": false,
-        "Arena": false,
-        // The following item(s) is(are) not yet part of the game. (WIP - Ignore for now.)
-        "BlackDivision": false
-    },
-    "GodMode": {
-        // Disable damage dealt by blunt force trauma.
-        "BluntForce": true,
+  // __Item Properties_________________________________________________________________________________________________
+  // Durability must be a whole number ranging from 1-9999999. (Default Value: 100000)
+  // BlindnessProtection must be any number value between 0.0 and 1.0 (0.0 = 0%, 1.0 = 100%)
+  // RepairCost must be a whole number ranging from 1-2000. Keep this value below 200 to avoid high costs.
+  // ------------------------------------------------------------------------------------------------------------------
+  "Durability": 100000,
+  "BlindnessProtection": 1.0,
+  "RepairCost": 35,
+  "TraderPrice": 69420,
+  "FleaPrice": 76767,
+  "TraderLoyaltyLevel": 1,
 
-        // (WIP) Disable damage from projectile penetration of armor.
-        // This value is a work in progress and is not currently implemented in this mod. - Please ignore for now.
-        "Penetration": false
-    },
-    "Blacklist": {
-        // Set to 'true' to disable item spawning on PMC or Scav bots, or to remove from global loot pools.
-        "pmc": false,
-        "scav": false,
-        "globalLoot": false
-    }
+
+  // __PreFab Skins____________________________________________________________________________________________________
+  // Set only ONE of the following values to 'true' to apply the desired armband skin to Holtzman Shield.
+  // BlackDivision, EODOwners, Discord, and Prayer are not yet part of the game. (WIP - Ignore for now.)
+  // Default Value (Evasion): true
+  // ------------------------------------------------------------------------------------------------------------------
+  "PreFab": {
+    "Evasion": true,
+    "Alpha": false,
+    "DeadSkul": false,
+    "TrainHard": false,
+    "TwitchRivals": false,
+    "Bear": false,
+    "Kiba": false,
+    "Labs": false,
+    "RFArmy": false,
+    "TerraGroup": false,
+    "Untar": false,
+    "USEC": false,
+    "Blue": false,
+    "Green": false,
+    "Red": false,
+    "White": false,
+    "Yellow": false,
+    "Unheard": false,
+    "Arena": false,
+    "XMas": false,
+    "Prestige1": false,
+    "Prestige2": false,
+    "Prestige3": false,
+    "Prestige4": false,
+    "Prestige5": false,
+    // Please ignore the following WIP skins for now.
+    "BlackDivision_wip": false,
+    "EODOwners_wip": false,
+    "Discord_wip": false,
+    "Prayer_wip": false
+  },
+
+
+  // __Advanced Options________________________________________________________________________________________________
+  // BluntForce will help to limit all blunt force damage from projectiles when set to true.
+  // This option still requires a client-side mod for no over damage to be taken by the player.
+  // Penetration damage still applies as normal unless you use a client-side mod. It cannot be done via a server-side
+  // mod alone due to how the game is coded.
+  // Default Value (Enabled): true
+  // ------------------------------------------------------------------------------------------------------------------
+  "BluntForce": true,
+
+
+  // __Item Blacklist Settings_________________________________________________________________________________________
+  // Set to 'true' to disable item spawning on PMC bots, or to remove from global loot pools.
+  // Default Value (Enabled): false
+  // ------------------------------------------------------------------------------------------------------------------
+  "PMC": false,
+  "GlobalLoot": false
 }
 ```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## Troubleshooting
+
+**Prefab not changing**
+- Ensure only **one** prefab option is set to `true`
+- Clear the game cache before launching
+
+**Item not appearing at trader**
+- Check your `TraderLoyaltyLevel` and `TraderPrice` settings
+- Ensure ArmbandCore is installed correctly
+
+**Shield not blocking damage**
+- BluntForce requires a **client-side mod** to fully prevent over‑damage
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Mod FAQ
-**Q: Where do I report bugs found with the current version of the mod?** <br>
-A: You can report bugs for the current version of this mod on the [HS Mod Page](https://hub.sp-tarkov.com/files/file/488-holtzman-shield).
+---
 
-**Q: Why can't I see the different prefab for the armband?** <br>
-A: Make sure you only have one of the options set to true. The remaining prefab options should be false. Before you launch the game, be sure to clear (delete) the cache files.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ROADMAP -->
 ## Roadmap
-- [X] Add Changelog
-- [ ] Fix bugs found/reported in SPT 3.9.5
+- [✅] Add changelog
+- [✅] Fix bugs from SPT 3.9.5
+- [✅] Optimize internal code
+- [❓] Additional improvements based on community feedback
 
-Suggest changes or view/report issues [here](https://github.com/jbs4bmx/HoltzmanShield/issues).
+Suggest changes or report issues here: [ISSUES](https://github.com/jbs4bmx/HoltzmanShield/issues)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+---
 
-
-<!-- CONTRIBUTING -->
 ## Contributing
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are welcome!
+If you have ideas or improvements:
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Open a pull request
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+Or simply open an issue tagged **enhancement**.
 
-You can also buy me a coffee! (This is not required, but I greatly appreciate any support provided.)</br>
+If you'd like to support development:
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/X8X611JH15)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+---
 
-
-<!-- LICENSE -->
 ## License
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License.
+See `LICENSE` for details.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+---
 
-
-
-<!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
-Contributors:
-  1. [sugonyak](https://hub.sp-tarkov.com/user/24725-sugonyak)
-     - Assitance in testing and bug fixes.
-  2. [ShadowXtrex](https://hub.sp-tarkov.com/user/16610-shadowxtrex)
-     - Assitance in testing and bug fixes.
-     - Code optimizations.
+Special thanks to:
+
+1. **[sugonyak](https://forge.sp-tarkov.com/user/21495/sugonyak)**
+   - Testing and bug fixes
+2. **[ShadowXtrex](https://forge.sp-tarkov.com/user/13380/shadowxtrex)**
+   - Testing, bug fixes, and code optimizations
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
+---
 
 <!-- Repository Metrics -->
 [contributors-shield]: https://img.shields.io/github/contributors/jbs4bmx/HoltzmanShield.svg?style=for-the-badge
@@ -281,9 +271,3 @@ Contributors:
 [issues-url]: https://github.com/jbs4bmx/HoltzmanShield/issues
 [license-shield]: https://img.shields.io/github/license/jbs4bmx/HoltzmanShield.svg?style=for-the-badge
 [license-url]: https://github.com/jbs4bmx/HoltzmanShield/blob/master/LICENSE.txt
-
-
-
-<!-- Framwork/Library URLs -->
-[TypeScript-url]: https://www.typescriptlang.org/
-[Vscode-url]: https://code.visualstudio.com/

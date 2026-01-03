@@ -1,0 +1,90 @@
+{
+  // Holtzman Shield Configuration File
+
+  // __Armor Coverage Settings_________________________________________________________________________________________
+  // The following values must be set to either true or false. You may set more than one of these to true.
+  // Default Value (Enabled): true (for all coverage areas)
+  // ------------------------------------------------------------------------------------------------------------------
+  "Head": true,
+  "Neck": true,
+  "Eyes": true,
+  "Ears": true,
+  "Jaw": true,
+  "Arms": true,
+  "Front": true,
+  "Back": true,
+  "Sides": true,
+  "Pelvis": true,
+  "Buttocks": true,
+  "Legs": true,
+
+
+  // __Item Properties_________________________________________________________________________________________________
+  // Durability must be a whole number ranging from 1-9999999. (Default Value: 100000)
+  // BlindnessProtection must be any number value between 0.0 and 1.0 (0.0 = 0%, 1.0 = 100%)
+  // RepairCost must be a whole number ranging from 1-2000. Keep this value below 200 to avoid high costs.
+  // ------------------------------------------------------------------------------------------------------------------
+  "Durability": 100000,
+  "BlindnessProtection": 1.0,
+  "RepairCost": 35,
+  "TraderPrice": 69420,
+  "FleaPrice": 76767,
+  "TraderLoyaltyLevel": 1,
+
+
+  // __PreFab Skins____________________________________________________________________________________________________
+  // Set only ONE of the following values to 'true' to apply the desired armband skin to Holtzman Shield.
+  // BlackDivision, EODOwners, Discord, and Prayer are not yet part of the game. (WIP - Ignore for now.)
+  // Default Value (Evasion): true
+  // ------------------------------------------------------------------------------------------------------------------
+  "PreFab": {
+    "Evasion": true,
+    "Alpha": false,
+    "DeadSkul": false,
+    "TrainHard": false,
+    "TwitchRivals": false,
+    "Bear": false,
+    "Kiba": false,
+    "Labs": false,
+    "RFArmy": false,
+    "TerraGroup": false,
+    "Untar": false,
+    "USEC": false,
+    "Blue": false,
+    "Green": false,
+    "Red": false,
+    "White": false,
+    "Yellow": false,
+    "Unheard": false,
+    "Arena": false,
+    "XMas": false,
+    "Prestige1": false,
+    "Prestige2": false,
+    "Prestige3": false,
+    "Prestige4": false,
+    "Prestige5": false,
+    // Please ignore the following WIP skins for now.
+    "BlackDivision_wip": false,
+    "EODOwners_wip": false,
+    "Discord_wip": false,
+    "Prayer_wip": false
+  },
+
+
+  // __Advanced Options________________________________________________________________________________________________
+  // BluntForce will help to limit all blunt force damage from projectiles when set to true.
+  // This option still requires a client-side mod for no over damage to be taken by the player.
+  // Penetration damage still applies as normal unless you use a client-side mod. It cannot be done via a server-side
+  // mod alone due to how the game is coded.
+  // Default Value (Enabled): true
+  // ------------------------------------------------------------------------------------------------------------------
+  "BluntForce": true,
+
+
+  // __Item Blacklist Settings_________________________________________________________________________________________
+  // Set to 'true' to disable item spawning on PMC bots, or to remove from global loot pools.
+  // Default Value (Enabled): false
+  // ------------------------------------------------------------------------------------------------------------------
+  "PMC": false,
+  "GlobalLoot": false
+}
