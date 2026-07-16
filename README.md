@@ -25,8 +25,8 @@
 ---
 
 ## About the Project
-**Type:** Server Mod
-**Requires:** [ArmbandCore](https://github.com/jbs4bmx/ArmbandCore/releases)
+**Type:** Server Mod</br>
+**Requires:** [ArmbandCore](https://github.com/jbs4bmx/ArmbandCore/releases)</br>
 **Disclaimer:** Provided *as-is* with no guarantee of support.
 
 Holtzman Shield adds a new armband variant that provides configurable armor protection across multiple body regions. Inspired by the personal shields of *Dune*, this mod allows you to fine‑tune which body parts are protected, how durable the shield is, and which visual prefab it uses.
@@ -216,6 +216,7 @@ The values that you see in the example below are the default values of the mod.<
 - [✅] Add changelog
 - [✅] Fix bugs from SPT 3.9.5
 - [✅] Optimize internal code
+- [❓] Add new armband options
 - [❓] Additional improvements based on community feedback
 
 Suggest changes or report issues here: [ISSUES](https://github.com/jbs4bmx/HoltzmanShield/issues)

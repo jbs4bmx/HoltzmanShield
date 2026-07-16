@@ -21,7 +21,7 @@ public record ModMetadata : AbstractModMetadata
     public override string Name { get; init; } = "HoltzmanShield";
     public override string Author { get; init; } = "jbs4bmx";
     public override List<string>? Contributors { get; init; }
-    public override SemanticVersioning.Version Version { get; init; } = new("4.0.0");
+    public override SemanticVersioning.Version Version { get; init; } = new("4.0.2");
     public override SemanticVersioning.Range SptVersion { get; init; } = new("~4.0.0");
     public override List<string>? Incompatibilities { get; init; }
     public override Dictionary<string, SemanticVersioning.Range>? ModDependencies { get; init; }
@@ -36,33 +36,109 @@ public class ShieldItemService(
     CustomItemService customItemService,
     DatabaseService databaseService,
     ConfigServer configServer,
+    //BotConfig botConfig,
+    //PmcConfig pmcConfig,
     ModHelper modHelper) : IOnLoad
 {
     private static class HSConstants
     {
         public static readonly MongoId ShieldId = new("66087622e26587d9430a1cfb");
         public static readonly MongoId TraderRagman = new("5ac3b934156ae10c4430e83c");
-        public const string DefaultPrefab =
-            "assets/content/items/equipment/armband/item_equipment_armband_evasion.bundle";
+        public const string DefaultPrefab = "assets/content/items/equipment/armband/item_equipment_armband_evasion.bundle";
+
+        public static readonly IReadOnlyDictionary<string, IEnumerable<string>> ColliderMap =
+            new Dictionary<string, IEnumerable<string>>(StringComparer.Ordinal)
+            {
+                ["Head"] = new[] { "ParietalHead", "BackHead", "HeadCommon" },
+                ["Eyes"] = new[] { "Eyes" },
+                ["Ears"] = new[] { "Ears" },
+                ["Jaw"] = new[] { "Jaw" },
+                ["Neck"] = new[] { "NeckFront", "NeckBack" },
+                ["Arms"] = new[] { "LeftUpperArm", "LeftForearm", "RightUpperArm", "RightForearm" },
+                ["Front"] = new[] { "RibcageUp", "RibcageLow" },
+                ["Back"] = new[] { "SpineTop", "SpineDown" },
+                ["Sides"] = new[] { "LeftSideChestUp", "LeftSideChestDown", "RightSideChestUp", "RightSideChestDown" },
+                ["Pelvis"] = new[] { "Pelvis" },
+                ["Buttocks"] = new[] { "PelvisBack" },
+                ["Legs"] = new[] { "LeftThigh", "LeftCalf", "RightThigh", "RightCalf" },
+            };
+
+        public static readonly IReadOnlyDictionary<string, string> PrefabMap =
+            new Dictionary<string, string>(StringComparer.Ordinal)
+            {
+                ["Evasion"] = "assets/content/items/equipment/armband/item_equipment_armband_evasion.bundle",
+                ["Alpha"] = "assets/content/items/equipment/armband/item_equipment_armband_alpha.bundle",
+                ["DeadSkul"] = "assets/content/items/equipment/armband/item_equipment_armband_dead.bundle",
+                ["TrainHard"] = "assets/content/items/equipment/armband/item_equipment_armband_helmet.bundle",
+                ["TwitchRivals"] = "assets/content/items/equipment/armband/item_equipment_armband_revals.bundle",
+                ["Bear"] = "assets/content/items/equipment/armband/item_equipment_armband_bear.bundle",
+                ["Kiba"] = "assets/content/items/equipment/armband/item_equipment_armband_kibaarms.bundle",
+                ["Labs"] = "assets/content/items/equipment/armband/item_equipment_armband_labs.bundle",
+                ["RFArmy"] = "assets/content/items/equipment/armband/item_equipment_armband_russia.bundle",
+                ["TerraGroup"] = "assets/content/items/equipment/armband/item_equipment_armband_terragroup.bundle",
+                ["Untar"] = "assets/content/items/equipment/armband/item_equipment_armband_un.bundle",
+                ["USEC"] = "assets/content/items/equipment/armband/item_equipment_armband_usec.bundle",
+                ["Blue"] = "assets/content/items/equipment/armband/item_equipment_armband_blue.bundle",
+                ["Green"] = "assets/content/items/equipment/armband/item_equipment_armband_green.bundle",
+                ["Red"] = "assets/content/items/equipment/armband/item_equipment_armband_red.bundle",
+                ["White"] = "assets/content/items/equipment/armband/item_equipment_armband_white.bundle",
+                ["Yellow"] = "assets/content/items/equipment/armband/item_equipment_armband_yellow.bundle",
+                ["Unheard"] = "assets/content/items/equipment/armband/item_equipment_armband_unheard.bundle",
+                ["Arena"] = "assets/content/items/equipment/armband/item_equipment_armband_arena.bundle",
+                ["XMas"] = "assets/content/items/equipment/armband/item_equipment_armband_xmass.bundle",
+                ["Prestige1"] = "assets/content/items/equipment/armband/item_equipment_armband_prestige_1.bundle",
+                ["Prestige2"] = "assets/content/items/equipment/armband/item_equipment_armband_prestige_2.bundle",
+                ["Prestige3"] = "assets/content/items/equipment/armband/item_equipment_armband_prestige_3.bundle",
+                ["Prestige4"] = "assets/content/items/equipment/armband/item_equipment_armband_prestige_4.bundle",
+                ["Prestige5"] = "assets/content/items/equipment/armband/item_equipment_armband_prestige_5.bundle",
+                // WIP -> default to Evasion
+                ["BlackDivision_wip"] = DefaultPrefab,
+                ["EODOwners_wip"] = DefaultPrefab,
+                ["Discord_wip"] = DefaultPrefab,
+                ["Prayer_wip"] = DefaultPrefab,
+            };
     }
 
     public Task OnLoad()
     {
+        // Defensive: ensure config and services are available
         var pathToMod = modHelper.GetAbsolutePathToModFolder(Assembly.GetExecutingAssembly());
         var shieldConfig = modHelper.GetJsonDataFromFile<ModConfig>(pathToMod, "config.jsonc");
-        var placeableSlot = databaseService.GetTables().Templates.Items[ItemTpl.INVENTORY_DEFAULT].Properties!.Slots!.ToList()[14];
-        var itemConfig = configServer!.GetConfig<ItemConfig>();
+        if (shieldConfig is null)
+        {
+            logger.Warning("[HS] No config found or failed to parse 'config.jsonc'. Aborting HoltzmanShield OnLoad.");
+            return Task.CompletedTask;
+        }
+
+        var tables = databaseService.GetTables();
+        var inventoryTemplates = tables.Templates.Items;
+        if (!inventoryTemplates.TryGetValue(ItemTpl.INVENTORY_DEFAULT, out var inventoryTemplate) ||
+            inventoryTemplate?.Properties?.Slots == null)
+        {
+            logger.Warning("[HS] Inventory template or slots not found. Aborting OnLoad.");
+            return Task.CompletedTask;
+        }
+
+        // Prefer to find armband slot robustly, fallback to index 14 with safety.
+        var slots = inventoryTemplate.Properties.Slots.ToList();
+        var placeableSlot = slots.ElementAtOrDefault(14) ?? slots.FirstOrDefault();
+        if (placeableSlot == null)
+        {
+            logger.Warning("[HS] Armband slot not found. Aborting OnLoad.");
+            return Task.CompletedTask;
+        }
+
+        // Removed unused 'itemConfig' to avoid warnings. Keep bot/pmc/container config references.
         var botConfig = configServer!.GetConfig<BotConfig>();
-        var pmcConfig = configServer!.GetConfig<PmcConfig>();
-        var containerTemplate = databaseService.GetTables().Templates.Items[BaseClasses.LOOT_CONTAINER];
+        var pmcConfig = configServer.GetConfig<PmcConfig>();
+        var containerTemplate = tables.Templates.Items.GetValueOrDefault(BaseClasses.LOOT_CONTAINER);
 
-        List<string> colliders = [];
+        var colliders = new HashSet<string>(StringComparer.Ordinal);
 
+        // defaults
         double bluntValue = 0.5;
         double indestructibleValue = 0.1;
-        string prefabValue;
-        string? trueKey = null;
-        int prefabCount = 0;
+        string prefabValue = HSConstants.DefaultPrefab;
 
         // Validate configuration values and set defaults if out of range.
         shieldConfig.RepairCost = Clamp(shieldConfig.RepairCost, 1, 2000, 500);
@@ -71,143 +147,85 @@ public class ShieldItemService(
         shieldConfig.FleaPrice = Clamp(shieldConfig.FleaPrice, 1, 9999999, 76767);
         shieldConfig.BlindnessProtection = Clamp(shieldConfig.BlindnessProtection, 0.0, 1.0, 1.0);
 
-        // Build collider list based on config
-        var colliderMap = new Dictionary<string, IEnumerable<string>>
+        // Build collider list based on config using safe reflection
+        foreach (var kvp in HSConstants.ColliderMap)
         {
-            ["Head"] = ["ParietalHead", "BackHead", "HeadCommon"],
-            ["Eyes"] = ["Eyes"],
-            ["Ears"] = ["Ears"],
-            ["Jaw"] = ["Jaw"],
-            ["Neck"] = ["NeckFront", "NeckBack"],
-            ["Arms"] = ["LeftUpperArm", "LeftForearm", "RightUpperArm", "RightForearm"],
-            ["Front"] = ["RibcageUp", "RibcageLow"],
-            ["Back"] = ["SpineTop", "SpineDown"],
-            ["Sides"] = ["LeftSideChestUp", "LeftSideChestDown", "RightSideChestUp", "RightSideChestDown"],
-            ["Pelvis"] = ["Pelvis"],
-            ["Buttocks"] = ["PelvisBack"],
-            ["Legs"] = ["LeftThigh", "LeftCalf", "RightThigh", "RightCalf"],
-        };
-
-        foreach (var kvp in colliderMap)
-        {
-            var enabled = (bool)typeof(ModConfig)
-                .GetProperty(kvp.Key)!
-                .GetValue(shieldConfig)!;
-
-            if (enabled)
-                colliders.AddRange(kvp.Value);
-        }
-
-        // Get PreFab value from config.
-        if (shieldConfig.PreFab != null)
-        {
-            foreach (var prop in typeof(ModPreFab).GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            if (TryGetBoolPropertyValue(shieldConfig, kvp.Key, out var enabled) && enabled)
             {
-                if (prop.PropertyType == typeof(bool) && (bool)(prop.GetValue(shieldConfig.PreFab) ?? false))
-                {
-                    prefabCount++;
-                    trueKey = prop.Name;
-                }
+                foreach (var c in kvp.Value)
+                    colliders.Add(c);
             }
         }
 
-        var prefabMap = new Dictionary<string, string>
+        // Resolve PreFab: find a single true boolean property on ModPreFab
+        if (shieldConfig.PreFab != null)
         {
-            ["Evasion"] = "assets/content/items/equipment/armband/item_equipment_armband_evasion.bundle",
-            ["Alpha"] = "assets/content/items/equipment/armband/item_equipment_armband_alpha.bundle",
-            ["DeadSkul"] = "assets/content/items/equipment/armband/item_equipment_armband_dead.bundle",
-            ["TrainHard"] = "assets/content/items/equipment/armband/item_equipment_armband_helmet.bundle",
-            ["TwitchRivals"] = "assets/content/items/equipment/armband/item_equipment_armband_revals.bundle",
-            ["Bear"] = "assets/content/items/equipment/armband/item_equipment_armband_bear.bundle",
-            ["Kiba"] = "assets/content/items/equipment/armband/item_equipment_armband_kibaarms.bundle",
-            ["Labs"] = "assets/content/items/equipment/armband/item_equipment_armband_labs.bundle",
-            ["RFArmy"] = "assets/content/items/equipment/armband/item_equipment_armband_russia.bundle",
-            ["TerraGroup"] = "assets/content/items/equipment/armband/item_equipment_armband_terragroup.bundle",
-            ["Untar"] = "assets/content/items/equipment/armband/item_equipment_armband_un.bundle",
-            ["USEC"] = "assets/content/items/equipment/armband/item_equipment_armband_usec.bundle",
-            ["Blue"] = "assets/content/items/equipment/armband/item_equipment_armband_blue.bundle",
-            ["Green"] = "assets/content/items/equipment/armband/item_equipment_armband_green.bundle",
-            ["Red"] = "assets/content/items/equipment/armband/item_equipment_armband_red.bundle",
-            ["White"] = "assets/content/items/equipment/armband/item_equipment_armband_white.bundle",
-            ["Yellow"] = "assets/content/items/equipment/armband/item_equipment_armband_yellow.bundle",
-            ["Unheard"] = "assets/content/items/equipment/armband/item_equipment_armband_unheard.bundle",
-            ["Arena"] = "assets/content/items/equipment/armband/item_equipment_armband_arena.bundle",
-            ["XMas"] = "assets/content/items/equipment/armband/item_equipment_armband_xmass.bundle",
-            ["Prestige1"] = "assets/content/items/equipment/armband/item_equipment_armband_prestige_1.bundle",
-            ["Prestige2"] = "assets/content/items/equipment/armband/item_equipment_armband_prestige_2.bundle",
-            ["Prestige3"] = "assets/content/items/equipment/armband/item_equipment_armband_prestige_3.bundle",
-            ["Prestige4"] = "assets/content/items/equipment/armband/item_equipment_armband_prestige_4.bundle",
-            ["Prestige5"] = "assets/content/items/equipment/armband/item_equipment_armband_prestige_5.bundle",
+            var trueProps = typeof(ModPreFab)
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(p => p.PropertyType == typeof(bool) && (bool)(p.GetValue(shieldConfig.PreFab) ?? false))
+                .Select(p => p.Name)
+                .ToList();
 
-            // WIP → default to Evasion
-            ["BlackDivision_wip"] = "assets/content/items/equipment/armband/item_equipment_armband_evasion.bundle",
-            ["EODOwners_wip"] = "assets/content/items/equipment/armband/item_equipment_armband_evasion.bundle",
-            ["Discord_wip"] = "assets/content/items/equipment/armband/item_equipment_armband_evasion.bundle",
-            ["Prayer_wip"] = "assets/content/items/equipment/armband/item_equipment_armband_evasion.bundle",
-        };
-
-        // Default prefab
-        const string defaultPrefab = HSConstants.DefaultPrefab;
-
-        // Resolve prefab
-        if (prefabCount == 0)
-        {
-            logger.Warning("[HS] No property for PreFab is set to 'true'. Defaulting to Evasion Armband.");
-            prefabValue = defaultPrefab;
-        }
-        else if (prefabCount > 1)
-        {
-            logger.Warning("[HS] More than one property value for PreFab is set to 'true'. Defaulting to Evasion Armband.");
-            prefabValue = defaultPrefab;
-        }
-        else
-        {
-            prefabValue = prefabMap.TryGetValue(trueKey!, out var path)
-                ? path
-                : defaultPrefab;
+            if (trueProps.Count == 1)
+            {
+                var key = trueProps[0];
+                if (!HSConstants.PrefabMap.TryGetValue(key, out prefabValue!))
+                    prefabValue = HSConstants.DefaultPrefab;
+            }
+            else if (trueProps.Count == 0)
+            {
+                logger.Debug("[HS] No prefab flag set; using default.");
+            }
+            else
+            {
+                logger.Warning("[HS] Multiple prefab flags set; using default.");
+            }
         }
 
         // Advanced Options
-        if (shieldConfig.BluntForce is bool blunt && blunt)
+        if (shieldConfig.BluntForce)
         {
             bluntValue = 0;
             indestructibleValue = 1;
         }
 
-        // Initialize item properties from configuration file.
-        var HSItem = CreateHoltzmanShieldItem(
-            shieldConfig,
-            prefabValue,
-            colliders,
-            bluntValue,
-            indestructibleValue
-        );
-
-        // Create the new item
+        // Initialize item properties from configuration file and create item
+        var HSItem = CreateHoltzmanShieldItem(shieldConfig, prefabValue, colliders.ToList(), bluntValue, indestructibleValue);
         customItemService.CreateItemFromClone(HSItem);
 
-        // Add to Armband slot
-        placeableSlot.Properties!.Filters!.First().Filter!.Add(HSConstants.ShieldId.ToString());
+        // Add to Armband slot - guard nulls and duplicates
+        var filter = placeableSlot.Properties?.Filters?.FirstOrDefault()?.Filter;
+        if (filter != null)
+        {
+            var idStr = HSConstants.ShieldId.ToString();
+            if (!filter.Contains(idStr))
+                filter.Add(idStr);
+        }
 
-        // Configure blacklists
-        ApplyBlacklists(
-            shieldConfig,
-            HSConstants.ShieldId,
-            pmcConfig,
-            botConfig,
-            containerTemplate
-        );
+        // Configure blacklists safely
+        ApplyBlacklists(shieldConfig, HSConstants.ShieldId, pmcConfig, botConfig, containerTemplate!);
 
-        // Call function to add the item to the specified trader.
-        AddToTraderAssort(
-            HSConstants.TraderRagman,
-            HSConstants.ShieldId,
-            shieldConfig.TraderPrice,
-            shieldConfig.TraderLoyaltyLevel
-        );
+        // Add to trader
+        AddToTraderAssort(HSConstants.TraderRagman, HSConstants.ShieldId, shieldConfig.TraderPrice, shieldConfig.TraderLoyaltyLevel);
 
-        // End.
         return Task.CompletedTask;
+    }
+
+    private static bool TryGetBoolPropertyValue(object obj, string propertyName, out bool value)
+    {
+        value = false;
+        var prop = obj.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+        if (prop == null || prop.PropertyType != typeof(bool))
+            return false;
+
+        var v = prop.GetValue(obj);
+        if (v is bool b)
+        {
+            value = b;
+            return true;
+        }
+
+        return false;
     }
 
     private static NewItemFromCloneDetails CreateHoltzmanShieldItem(
@@ -219,7 +237,7 @@ public class ShieldItemService(
     {
         return new NewItemFromCloneDetails
         {
-            ItemTplToClone = ItemTpl.FACECOVER_ATOMIC_DEFENSE_CQCM_BALLISTIC_MASK_SKULL,
+            ItemTplToClone = ItemTpl.FACECOVER_BALACLAVA,
             ParentId = BaseClasses.ARMORED_EQUIPMENT,
             NewId = HSConstants.ShieldId,
             FleaPriceRoubles = cfg.FleaPrice,
@@ -246,6 +264,7 @@ public class ShieldItemService(
                 BlocksEyewear = false,
                 BlocksFaceCover = false,
                 BlocksHeadwear = false,
+                BlocksArmorVest = false,
                 BluntThroughput = bluntValue,
                 Description = "Shield technology engineered by House Atreides that aims to prevent kinetic projectiles.",
                 Durability = cfg.Durability,
@@ -278,34 +297,39 @@ public class ShieldItemService(
         BotConfig botConfig,
         TemplateItem containerTemplate)
     {
-        // PMC blacklist
-        if (cfg.PMC)
+        var idStr = itemId.ToString();
+
+        // PMC blacklist - avoid duplicate entries
+        if (cfg.PMC && pmcConfig != null)
         {
-            pmcConfig.VestLoot.Blacklist.Add(itemId.ToString());
-            pmcConfig.PocketLoot.Blacklist.Add(itemId.ToString());
-            pmcConfig.BackpackLoot.Blacklist.Add(itemId.ToString());
-            pmcConfig.GlobalLootBlacklist.Add(itemId.ToString());
+            if (!pmcConfig.VestLoot.Blacklist.Contains(idStr)) pmcConfig.VestLoot.Blacklist.Add(idStr);
+            if (!pmcConfig.PocketLoot.Blacklist.Contains(idStr)) pmcConfig.PocketLoot.Blacklist.Add(idStr);
+            if (!pmcConfig.BackpackLoot.Blacklist.Contains(idStr)) pmcConfig.BackpackLoot.Blacklist.Add(idStr);
+            if (!pmcConfig.GlobalLootBlacklist.Contains(idStr)) pmcConfig.GlobalLootBlacklist.Add(idStr);
         }
 
         // Global loot blacklist
-        if (cfg.GlobalLoot)
+        if (cfg.GlobalLoot && botConfig != null)
         {
             // Remove from bot loot tables
             foreach (var limitDict in botConfig.ItemSpawnLimits.Values)
             {
-                if (!limitDict.ContainsKey(itemId.ToString()))
-                    limitDict[itemId.ToString()] = 0;
+                if (!limitDict.ContainsKey(idStr))
+                    limitDict[idStr] = 0;
             }
 
-            // Remove from containers
+            // Remove from containers - guard against nulls
             if (containerTemplate?.Properties?.Grids != null)
             {
                 foreach (var grid in containerTemplate.Properties.Grids)
                 {
                     var filters = grid.Properties?.Filters?.ToList();
-                    if (filters != null && filters.Count > 0)
+                    if (filters?.Count > 0)
                     {
-                        filters[0].ExcludedFilter?.Add(itemId);
+                        var excluded = filters[0].ExcludedFilter;
+                        if (excluded != null && !excluded.Contains(itemId))
+                            excluded.Add(itemId);
+
                         grid.Properties!.Filters = filters;
                     }
                 }
@@ -313,23 +337,24 @@ public class ShieldItemService(
         }
     }
 
-
     private void AddToTraderAssort(MongoId traderId, MongoId itemId, double price, int level)
     {
-        // This function adds the specified item to the trader's assortment with the property values passed to it.
         var assort = databaseService.GetTrader(traderId)?.Assort;
-
         if (assort == null)
         {
             logger.Warning($"[HS] Trader {traderId} not found. Cannot add item to assort.");
             return;
         }
 
-        // Generate a new assortId.
-        var assortId = new MongoId();
+        // Generate a new assortId and avoid key collisions
+        MongoId assortId;
+        do
+        {
+            assortId = new MongoId();
+        } while (assort.Items.Any(i => i.Id == assortId));
 
-        // Add item entry
-        assort!.Items.Add(new Item
+        // Add item entry (no-null guards)
+        assort.Items.Add(new Item
         {
             Id = assortId,
             Template = itemId,
@@ -351,25 +376,19 @@ public class ShieldItemService(
             Template = ItemTpl.MONEY_ROUBLES
         }]];
 
-        // Add the new item to the trader's assortment and set the loyaltylevel.
-        assort!.LoyalLevelItems[assortId] = level;
+        // Set the loyalty level
+        assort.LoyalLevelItems[assortId] = level;
     }
 
-    private static int Clamp(int value, int min, int max, int fallback)
-    {
-        return value < min || value > max ? fallback : value;
-    }
+    private static int Clamp(int value, int min, int max, int fallback) =>
+        value < min || value > max ? fallback : value;
 
-    private static double Clamp(double value, double min, double max, double fallback)
-    {
-        return value < min || value > max ? fallback : value;
-    }
-
+    private static double Clamp(double value, double min, double max, double fallback) =>
+        value < min || value > max ? fallback : value;
 }
 
 public class ModConfig
 {
-    //Coverage Options
     public bool Head { get; set; }
     public bool Neck { get; set; }
     public bool Eyes { get; set; }
@@ -382,22 +401,14 @@ public class ModConfig
     public bool Pelvis { get; set; }
     public bool Buttocks { get; set; }
     public bool Legs { get; set; }
-
-    // Item Properties
     public int Durability { get; set; }
     public double BlindnessProtection { get; set; }
     public int RepairCost { get; set; }
     public int TraderPrice { get; set; }
     public int FleaPrice { get; set; }
     public int TraderLoyaltyLevel { get; set; }
-
-    // Prefab
     public ModPreFab? PreFab { get; set; }
-
-    // Advanced
     public bool BluntForce { get; set; }
-
-    // Blacklist
     public bool PMC { get; set; }
     public bool GlobalLoot { get; set; }
 }
@@ -429,8 +440,6 @@ public class ModPreFab
     public bool Prestige3 { get; set; }
     public bool Prestige4 { get; set; }
     public bool Prestige5 { get; set; }
-
-    // WIP Prefabs
     public bool BlackDivision_wip { get; set; }
     public bool EODOwners_wip { get; set; }
     public bool Discord_wip { get; set; }
