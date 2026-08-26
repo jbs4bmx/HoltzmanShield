@@ -123,7 +123,7 @@ The values that you see in the example below are the default values of the mod.<
 
   // __Item Properties_________________________________________________________________________________________________
   // Durability must be a whole number ranging from 1-9999999. (Default Value: 100000)
-  // BlindnessProtection must be any number value between 0.0 and 1.0 (0.0 = 0%, 1.0 = 100%)
+  // BlindnessProtection must be any number value between 0.0 and 1.0 (0.0: 0%, 1.0: 100%)
   // RepairCost must be a whole number ranging from 1-2000. Keep this value below 200 to avoid high costs.
   // ------------------------------------------------------------------------------------------------------------------
   "Durability": 100000,
@@ -136,40 +136,49 @@ The values that you see in the example below are the default values of the mod.<
 
   // __PreFab Skins____________________________________________________________________________________________________
   // Set only ONE of the following values to 'true' to apply the desired armband skin to Holtzman Shield.
-  // BlackDivision, EODOwners, Discord, and Prayer are not yet part of the game. (WIP - Ignore for now.)
+  // Certain armbands not yet added to the version of EFT used by SPT and will default to Evasion until they are added.
+  // This mod does not backport items from more recent versions of EFT. Just because you see them listed here, does not
+  // mean they are in the version of the game used by SPT. I'm just preparing for the future.
   // Default Value (Evasion): true
   // ------------------------------------------------------------------------------------------------------------------
   "PreFab": {
     "Evasion": true,
     "Alpha": false,
+    "Arena": false,
+    "BEAR": false,
+    "Beta": false,
+    "Blue": false,
+    "Darkness": false,
     "DeadSkul": false,
-    "TrainHard": false,
-    "TwitchRivals": false,
-    "Bear": false,
+    "Discord": false,
+    "Forged": false,
+    "Green": false,
+    "HeadEyes": false,
+    "Humanity": false,
+    "Khorovod": false,
     "Kiba": false,
     "Labs": false,
+    "Lighthouse": false,
+    "Loot": false,
+    "Red": false,
+    "Release": false,
     "RFArmy": false,
+    "Rivals2020": false,
+    "SBEU": false,
+    "Survivor": false,
     "TerraGroup": false,
+    "TrainHard": false,
+    "Unheard": false,
     "Untar": false,
     "USEC": false,
-    "Blue": false,
-    "Green": false,
-    "Red": false,
     "White": false,
     "Yellow": false,
-    "Unheard": false,
-    "Arena": false,
-    "XMas": false,
     "Prestige1": false,
     "Prestige2": false,
     "Prestige3": false,
     "Prestige4": false,
     "Prestige5": false,
-    // Please ignore the following WIP skins for now.
-    "BlackDivision_wip": false,
-    "EODOwners_wip": false,
-    "Discord_wip": false,
-    "Prayer_wip": false
+    "Prestige6": false
   },
 
 
@@ -184,11 +193,14 @@ The values that you see in the example below are the default values of the mod.<
 
 
   // __Item Blacklist Settings_________________________________________________________________________________________
-  // Set to 'true' to disable item spawning on PMC bots, or to remove from global loot pools.
+  // Set to 'true' to disable item spawning on PMCs, Bots, Containers, Loose Loot, or AirDrops.
   // Default Value (Enabled): false
   // ------------------------------------------------------------------------------------------------------------------
-  "PMC": false,
-  "GlobalLoot": false
+  "PMCLoot": false,
+  "BotLoot": false,
+  "ContainerLoot": false,
+  "LooseLoot": false,
+  "AirDropLoot": false
 }
 ```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

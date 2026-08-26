@@ -1,5 +1,17 @@
 # 🔄 HOLTZMAN SHIELD FULL CHANGE LOG 🔄
 
+## 🚧 23 August, 2026 - 4.1.3 (For SPT 4.1.3)
+Overview</br>
+Version update. Just updating to support SPTushonka's latest release. Added a few minor config options.
+
+Update - Version support for SPT 4.1.3 and EFT 0.16.9.0.40743</br>
+Add - Additional blacklist config options.</br>
+Add - More armband options and future-proofing for future armband releases.</br>
+Fix - Change "XMas" armband to use correct name "Khorovod".
+
+---
+---
+
 ### 🚧 15 July, 2026 - 4.0.2 (For SPT 4.0.0+)
 Fix - Interoperability issues with headwear has been resolved.</br>
 Update - Minor code optimizations.</br>

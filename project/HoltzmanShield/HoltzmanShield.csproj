@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
 		<RootNamespace>HoltzmanShield</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 		<OutputType>Library</OutputType>
-		<Version>4.0.2</Version>
+		<Version>4.1.2</Version>
 		<OutputPath>bin\$(Configuration)\$(SolutionName)\</OutputPath>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<Configurations>Debug;Release;Package</Configurations>
@@ -26,28 +26,28 @@
 
   <ItemGroup>
     <Reference Include="SemanticVersioning">
-      <HintPath>T:\SPT\SPT\SemanticVersioning.dll</HintPath>
+      <HintPath>T:\SPT\SPT_Runtime\SemanticVersioning.dll</HintPath>
     </Reference>
     <Reference Include="SPT.Server">
-      <HintPath>T:\SPT\SPT\SPT.Server.dll</HintPath>
+      <HintPath>T:\SPT\SPT_Runtime\SPT.Server.dll</HintPath>
     </Reference>
     <Reference Include="SPTarkov.Common">
-      <HintPath>T:\SPT\SPT\SPTarkov.Common.dll</HintPath>
+      <HintPath>T:\SPT\SPT_Runtime\SPTarkov.Common.dll</HintPath>
     </Reference>
     <Reference Include="SPTarkov.DI">
-      <HintPath>T:\SPT\SPT\SPTarkov.DI.dll</HintPath>
+      <HintPath>T:\SPT\SPT_Runtime\SPTarkov.DI.dll</HintPath>
     </Reference>
     <Reference Include="SPTarkov.Reflection">
-      <HintPath>T:\SPT\SPT\SPTarkov.Reflection.dll</HintPath>
+      <HintPath>T:\SPT\SPT_Runtime\SPTarkov.Reflection.dll</HintPath>
     </Reference>
     <Reference Include="SPTarkov.Server.Assets">
-      <HintPath>T:\SPT\SPT\SPTarkov.Server.Assets.dll</HintPath>
+      <HintPath>T:\SPT\SPT_Runtime\SPTarkov.Server.Assets.dll</HintPath>
     </Reference>
     <Reference Include="SPTarkov.Server.Core">
-      <HintPath>T:\SPT\SPT\SPTarkov.Server.Core.dll</HintPath>
+      <HintPath>T:\SPT\SPT_Runtime\SPTarkov.Server.Core.dll</HintPath>
     </Reference>
     <Reference Include="System.IO.Hashing">
-      <HintPath>T:\SPT\SPT\System.IO.Hashing.dll</HintPath>
+      <HintPath>T:\SPT\SPT_Runtime\System.IO.Hashing.dll</HintPath>
     </Reference>
   </ItemGroup>
 
